@@ -102,9 +102,9 @@ if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'central_db',
+	'username' => 'u930296518_KOpbY',
+	'password' => '=4m2Q1sS',
+	'database' => 'u930296518_eV7r4',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
