@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 // print_r($_SERVER);
 // die;
-if( $_SERVER['SERVER_NAME'] == 'thecrindustries.com' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.com'){
+if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.online'){
     
     $config['base_url'] = 'https://'.$_SERVER['HTTP_HOST'];
 }else{
