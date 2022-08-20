@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // die;
 if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.online'){
     
-    $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'];
+    $config['base_url'] = 'https://'.$_SERVER['HTTP_HOST'];
 }else{
     
     $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].'/RiceMill/ERP/ERP_Admin';
