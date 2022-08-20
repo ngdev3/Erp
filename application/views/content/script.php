@@ -5,8 +5,7 @@
 <script src="<?php echo base_url(); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="<?php echo base_url(); ?>plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url(); ?>dist/js/adminlte.js"></script>
+
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -37,3 +36,5 @@
 <script src="<?php echo base_url(); ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- AdminLTE App -->
+<script src="<?php echo base_url(); ?>dist/js/adminlte.js"></script>

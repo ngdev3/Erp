@@ -12,10 +12,10 @@
              <table id="datatable-grid" class="table table-bordered table-striped">
                <thead>
                  <tr>
-                   <th>Rendering engine</th>
-                   <th>Browser</th>
-                   <th>Platform(s)</th>
-                   <th>Engine version</th>
+                   <th>Id</th>
+                   <th>Name</th>
+                   <th>Status</th>
+                   <th>Action</th>
                  </tr>
                </thead>
              </table>
@@ -33,13 +33,22 @@
  <!-- /.content -->
 
  <script>
+  
    $(function() {
      $("#datatable-grid").DataTable({
        "responsive": true,
        "lengthChange": false,
        "autoWidth": false,
+       "dom": 'frtipB',
        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-       
+       "ajax": {
+         url: "<?php echo base_url(); ?>/master/state/view_all", // json datasource
+         type: "post",
+         error: function(data) {
+           $("#employee-grid_processing").css("display", "none");
+         }
+       },
+
      }).buttons().container().appendTo('#datatable-grid_wrapper .col-md-6:eq(0)');
    });
  </script>
