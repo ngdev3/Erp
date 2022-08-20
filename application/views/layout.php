@@ -11,7 +11,11 @@
 
 </head>
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+	<!-- Script -->
+	<?php $this->load->view('content/script') ?>
+	<!-- Script -->
+	
 	<div class="wrapper">
 
 		<!-- Preloader -->
@@ -76,7 +80,7 @@
 			<!-- /.content-header -->
 
 			<!-- Main Content -->
-			<?php $this->load->view('content/main_content') ?>
+			<?php $this->load->view($page) ?>
 			<!-- Main Content -->
 
 		</div>
@@ -95,9 +99,6 @@
 	</div>
 	<!-- ./wrapper -->
 
-	<!-- Script -->
-	<?php $this->load->view('content/script') ?>
-	<!-- Script -->
 	
 </body>
 
