@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-//print_r($_SERVER['HTTP_HOST']); die;
+print_r($_SERVER['HTTP_HOST']); die;
 if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.online'){
 
 	$db['default'] = array(
@@ -102,9 +102,9 @@ if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'u930296518_KOpbY',
-	'password' => '=4m2Q1sS',
-	'database' => 'u930296518_eV7r4',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'central_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
