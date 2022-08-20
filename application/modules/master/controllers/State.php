@@ -11,6 +11,7 @@ class State extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('state_mod');
     }
 
     /* End of constructor */
@@ -36,18 +37,15 @@ class State extends CI_Controller
 
     public function view_all()
     {
-        // echo "hhhhhhhhhhhhh";
-        $requestData    = $this->input->post(null, true);
+        $requestData    = 0; //$this->input->post(null, true);
         /*Counting warehouse data*/
         $query          =   $this->state_mod->count_data();
         $totalData      =   $query->num_rows();
-        pr($query->num_rows()); die;
         $totalFiltered  =   $totalData;  //
         /*End of counting warehouse data*/
 
-        // $d = array('id' => 'state_id', 'name' => 'name', 'status' => 'status');
         $citydata = $this->state_mod->get_data();
-        //pr($citydata);die;       
+        // pr($citydata);die;       
         $data   =   array();
         if (count($citydata) > 0) {
             $j = $requestData['start'];
@@ -59,9 +57,9 @@ class State extends CI_Controller
                 $nestedData[]   =   $j;
 
                 // $nestedData[]   =   $row["city_name"];
-                $nestedData[]   =   $row["country_name"];
+                $nestedData[]   =   $row["name"];
                 $nestedData[]   =   $row["status"];
-                $state_id        =   $row['state_id'];
+                $state_id        =   $row['id'];
                 $nestedData[]   =   $this->load->view("state/_action", array("row" => $row), true);
                 $data[]         =   $nestedData;
             }
