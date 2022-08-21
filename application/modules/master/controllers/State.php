@@ -43,9 +43,7 @@ class State extends CI_Controller
         $totalData      =   $query->num_rows();
         $totalFiltered  =   $totalData;  //
         /*End of counting warehouse data*/
-
         $citydata = $this->state_mod->get_data();
-        // pr($citydata);die;       
         $data   =   array();
         if (count($citydata) > 0) {
             $j = $requestData['start'];
@@ -53,10 +51,7 @@ class State extends CI_Controller
                 $j++;
                 $row    =   (array)$citydata[$i];
                 $nestedData     =   array();
-                //$nestedData[]   =   "<input type='checkbox'  class='deleteRow' value='".$row['id']."'  />";
                 $nestedData[]   =   $j;
-
-                // $nestedData[]   =   $row["city_name"];
                 $nestedData[]   =   $row["name"];
                 $nestedData[]   =   $row["status"];
                 $state_id        =   $row['id'];
@@ -73,6 +68,47 @@ class State extends CI_Controller
         );
 
         echo json_encode($json_data);  // send data as json format
+    }
+
+    /**
+     * deletecategories
+     *
+     * this function delete State
+     * 
+     * @access	public
+     * @return	html data
+     */
+    public function delete_city()
+    {
+        $post = $this->input->post('id');
+        if (!empty($post)) {
+            if ($this->state_mod->delete_city($post)) {
+                set_flashdata('success', 'State deleted successfully');
+                //redirect('/city');
+            } else {
+                set_flashdata('success', 'Some error occured');
+            }
+        }
+    }
+    /**
+     * deletecategories
+     *
+     * this function delete State
+     * 
+     * @access	public
+     * @return	html data
+     */
+    public function restoreData()
+    {
+        $post = $this->input->post('id');
+        if (!empty($post)) {
+            if ($this->state_mod->restoreData($post)) {
+                set_flashdata('success', 'State Restored successfully');
+                //redirect('/city');
+            } else {
+                set_flashdata('success', 'Some error occured');
+            }
+        }
     }
 
     /*End of Function*/

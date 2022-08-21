@@ -54,6 +54,7 @@
 			<?php if (@$breadcum != '') { ?>
 				<div class="content-header">
 					<div class="container-fluid">
+						<?php echo get_flashdata(); ?>
 						<div class="row mb-2">
 							<div class="col-sm-6">
 								<h1 class="m-0">Dashboard v2</h1>
