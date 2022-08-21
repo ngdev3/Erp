@@ -1,4 +1,5 @@
  <!-- Main content -->
+ <?php $QUERY_STRING = $_SERVER['QUERY_STRING']; ?>
  <section class="content">
    <div class="container-fluid">
      <div class="row">
@@ -33,7 +34,65 @@
  <!-- /.content -->
 
  <script>
-  
+   //    DELETE CATEGORY
+   function delete_state(id) {
+     var name = $('#getData_' + id).data('value');
+     var csrf_name = "<?= $this->security->get_csrf_token_name() ?>";
+     var csrf_token = "<?= $this->security->get_csrf_hash() ?>";
+     if (id != '') {
+       $.confirm({
+         title: 'Confirmation Dialog',
+         content: 'Are you sure want to Delete <b>' + name + "</b> Detail",
+         buttons: {
+           confirm: {
+             btnClass: 'btn-blue',
+             action: function() {
+               $.ajax({
+                 type: "POST",
+                 url: "<?php echo site_url("master/state/delete_city") ?>",
+                 data: csrf_name + '=' + csrf_token + '&id=' + id,
+                 success: function(data) {
+
+                   window.location.href = "<?= base_url() ?>master/state";
+                 }
+               });
+             }
+           },
+           cancel: {}
+         }
+       });
+     }
+   }
+
+   function restore_state(id){
+    var name = $('#getData_' + id).data('value');
+    var csrf_name = "<?= $this->security->get_csrf_token_name() ?>";
+     var csrf_token = "<?= $this->security->get_csrf_hash() ?>";
+     if (id != '') {
+       $.confirm({
+         title: 'Confirmation Dialog',
+         content: 'Are you sure want to Restore <b>' + name + "</b> Detail",
+         buttons: {
+           confirm: {
+             btnClass: 'btn-blue',
+             action: function() {
+               $.ajax({
+                 type: "POST",
+                 url: "<?php echo site_url("master/state/restoreData") ?>",
+                 data: csrf_name + '=' + csrf_token + '&id=' + id,
+                 success: function(data) {
+
+                   window.location.href = "<?= base_url() ?>master/state";
+                 }
+               });
+             }
+           },
+           cancel: {}
+         }
+       });
+     }
+   }
+
    $(function() {
      $("#datatable-grid").DataTable({
        "responsive": true,

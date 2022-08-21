@@ -38,3 +38,6 @@
 
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>dist/js/adminlte.js"></script>
+
+<!-- JQuery Confim Box -->
+<script src="<?php echo base_url(); ?>plugins/jconfirm/jquery-confirm.min.js"></script>

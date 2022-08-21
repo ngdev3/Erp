@@ -12,3 +12,7 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>dist/self/style.css">
+
+
+<!-- Jquery Confirm Box -->
+<link rel="stylesheet" href="<?php echo base_url(); ?>plugins/jconfirm/jquery-confirm.min.css">
