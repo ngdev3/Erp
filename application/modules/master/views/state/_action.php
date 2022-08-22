@@ -4,8 +4,8 @@
 
     <?php
     if ($row['status'] != 'Delete') { ?>
-        <a href="javascript:void(0);" class="padding-5 text-warning" id="getData_<?php echo $row['id'] ?>" data-value="<?php echo $row['name'] ?>" title="delete" onclick="delete_state(<?php echo $row['id'] ?>);"><i class="fa fa-trash"></i></a>
+        <a href="javascript:void(0);" class="padding-5 text-warning" id="getData_<?php echo $row['id'] ?>" data-value="<?php echo $row['name'] ?>" title="delete" onclick="delete_data(<?php echo $row['id'] ?>);"><i class="fa fa-trash"></i></a>
     <?php }else{ ?>
-        <a href="javascript:void(0);" class="padding-5 text-primary" id="getData_<?php echo $row['id'] ?>" data-value="<?php echo $row['name'] ?>" title="delete" onclick="restore_state(<?php echo $row['id'] ?>);"><i class="fa fa-history"></i></a>
+        <a href="javascript:void(0);" class="padding-5 text-primary" id="getData_<?php echo $row['id'] ?>" data-value="<?php echo $row['name'] ?>" title="delete" onclick="restore_data(<?php echo $row['id'] ?>);"><i class="fa fa-history"></i></a>
         <?php }?>
 </div>

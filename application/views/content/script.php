@@ -41,3 +41,7 @@
 
 <!-- JQuery Confim Box -->
 <script src="<?php echo base_url(); ?>plugins/jconfirm/jquery-confirm.min.js"></script>
+
+<!-- Jquery Form Validations -->
+<script src="<?php echo base_url(); ?>plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?php echo base_url(); ?>plugins/jquery-validation/additional-methods.min.js"></script>

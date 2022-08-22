@@ -408,8 +408,10 @@ if (!function_exists('get_order_status')) {
  */
 if (!function_exists('currentuserinfo')) {
     function currentuserinfo() {
-       
         $CI = &get_instance();
+        $query = $CI->db->get("users");
+        $row = $query->row();
+        $CI->session->set_userdata("userinfo",$row);   
         return $CI->session->userdata("userinfo");
     }
 

@@ -8,51 +8,35 @@ class State_mod extends CI_Model
         parent::__construct();
     }
 
+    //THIS FUNCTION ADD
+    public function add($data)
+    {
+        if ($this->db->insert("states", $data)) {
+            return true;
+        }
+    }
 
     function count_data()
     {
-        $requestData = $this->input->post(null, true);
         $this->db->select('*');
         return $query = $this->db->get('states');
     }
 
-    function get_data($parent_id = "")
+    function get_data()
     {
-        $requestData = $this->input->post(null, true);
-        $columns = array(
-            1 => 'wct.name',
-            2 => 'wcntry.name',
-            3 => 'wct.status'
-        );
 
         $this->db->select('*');
-        $this->db->from('states as wct');
-        if (!empty($requestData['search']['value'])) {
-            $search_val = $requestData['search']['value'];
-            $this->db->where("(wct.name LIKE '%$search_val%' OR wcntry.name LIKE '%$search_val%' OR wct.status  LIKE '%$search_val%')");
-        }
-        if (isset($_GET['status'])) {
-
-            $this->db->where("wct.status =", $_GET["status"]);
-        } 
-        if (@$requestData['order'][0]['column'] && @$requestData['order'][0]['dir']) {
-            $order = @$requestData['order'][0]['dir'];
-            $column_name = $columns[@$requestData['order'][0]['column']];
-            $this->db->order_by("$column_name", "$order");
-        } else {
-            $this->db->order_by("wct.id", "desc");
-        }
-        if (@$requestData['length'] && $requestData['length'] != '-1') {
-            $this->db->limit($requestData['length'], $requestData['start']);
-        }
+        $this->db->from('states');
         $query = $this->db->get();
         if ($query->num_rows()) {
             return $query->result();
+        }else{
+            return false;
         }
     }
 
     //  THIS FUNCTION DELETE city DATA
-    function delete_city($id)
+    function deletedata($id)
     {
         $data['status'] = 'Delete';
         $this->db->where('id', $id);
@@ -68,6 +52,43 @@ class State_mod extends CI_Model
         return true;
     }
 
+    /**
+     * check_preexistance
+     *
+     * function for check either color name pre exist
+     * 
+     * @access	public
+     * @return	html data
+     */
+    function check_preexistance($id, $city_name)
+    {
+        $this->db->select('*');
+        $this->db->where('id !=', $id);
+        $this->db->where('name ', $city_name);
+        $query = $this->db->get('states');
+        //  echo $this->db->last_query();
+        return $query->num_rows();
+        //die();
+    }
 
+    //  THIS FUNCTION EDIT city DATA
+    function edit($id)
+    {
+        $data['id'] = $id;
+        $data['name'] = $this->input->post('add_name');
+        $data['status'] = $this->input->post('status');
+        $data['updated_date'] = date('Y-m-d H:i:s');
+        $this->db->where('id', $id);
+        $this->db->update('states', $data);
+    }
+
+    //  THIS FUNCTION VIEW city DATA
+    function view($id) {
+        $this->db->select('*');
+        $this->db->where('id', $id);
+        return $query = $this->db->get("states")->row();
+    }
+
+    
     /* End of function */
 }
