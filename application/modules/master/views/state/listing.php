@@ -1,15 +1,16 @@
  <!-- Main content -->
- <?php $QUERY_STRING = $_SERVER['QUERY_STRING']; ?>
  <section class="content">
    <div class="container-fluid">
      <div class="row">
        <div class="col-12">
          <div class="card">
-           <div class="card-header">
-             <h3 class="card-title">DataTable with default features</h3>
-           </div>
            <!-- /.card-header -->
            <div class="card-body">
+             <div class="col-6"> </div>
+             <div class="col-6 pull-right">
+               <a href="<?php echo base_url('master/state/add'); ?>" id="back-btn" class="btn btn-success">Add State</a>
+             </div>
+
              <table id="datatable-grid" class="table table-bordered table-striped">
                <thead>
                  <tr>
@@ -35,7 +36,7 @@
 
  <script>
    //    DELETE CATEGORY
-   function delete_state(id) {
+   function delete_data(id) {
      var name = $('#getData_' + id).data('value');
      var csrf_name = "<?= $this->security->get_csrf_token_name() ?>";
      var csrf_token = "<?= $this->security->get_csrf_hash() ?>";
@@ -49,10 +50,9 @@
              action: function() {
                $.ajax({
                  type: "POST",
-                 url: "<?php echo site_url("master/state/delete_city") ?>",
+                 url: "<?php echo site_url("master/state/deletedata") ?>",
                  data: csrf_name + '=' + csrf_token + '&id=' + id,
                  success: function(data) {
-
                    window.location.href = "<?= base_url() ?>master/state";
                  }
                });
@@ -64,9 +64,9 @@
      }
    }
 
-   function restore_state(id){
-    var name = $('#getData_' + id).data('value');
-    var csrf_name = "<?= $this->security->get_csrf_token_name() ?>";
+   function restore_data(id) {
+     var name = $('#getData_' + id).data('value');
+     var csrf_name = "<?= $this->security->get_csrf_token_name() ?>";
      var csrf_token = "<?= $this->security->get_csrf_hash() ?>";
      if (id != '') {
        $.confirm({

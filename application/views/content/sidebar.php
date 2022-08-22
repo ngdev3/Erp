@@ -5,7 +5,7 @@
 			<img src="<?php echo base_url(); ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 		</div>
 		<div class="info">
-			<a href="#" class="d-block">Alexander Pierce</a>
+			<a href="javascript:void(0)" class="d-block">Alexander Pierce</a>
 		</div>
 	</div>
 
@@ -29,7 +29,7 @@
 			<!-- menu-open -->
 			<li class="nav-header">Dashboard</li>
 			<li class="nav-item ">
-				<a href="#" class="nav-link">
+				<a href="javascript:void(0)" class="nav-link">
 					<i class="nav-icon fas fa-copy"></i>
 					<p>
 						Master
@@ -92,7 +92,7 @@
 				</ul>
 			</li>
 			<li class="nav-item">
-				<a href="#" class="nav-link">
+				<a href="javascript:void(0)" class="nav-link">
 					<i class="nav-icon far fa-plus-square"></i>
 					<p>
 						Extras
@@ -101,7 +101,7 @@
 				</a>
 				<ul class="nav nav-treeview">
 					<li class="nav-item">
-						<a href="#" class="nav-link">
+						<a href="javascript:void(0)" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
 								Login & Register v1
@@ -136,7 +136,7 @@
 						</ul>
 					</li>
 					<li class="nav-item">
-						<a href="#" class="nav-link">
+						<a href="javascript:void(0)" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>
 								Login & Register v2

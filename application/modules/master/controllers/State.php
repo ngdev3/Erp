@@ -19,7 +19,7 @@ class State extends CI_Controller
     /**
      *index
      *
-     * This function dispaly login page
+     * This function dispaly Data Management
      * 
      * @access	public
      * @return	html data
@@ -29,11 +29,107 @@ class State extends CI_Controller
     {
         $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'State Listing');
         $data['title'] = WEBSITE_NAME . ' | State';
-        $data['page_title'] = 'State';
+        $data['page_title'] = 'State Management';
         $page = 'state/listing';
         $data['page'] = $page;
         _layout($data);
     }
+
+    /**
+     * Add
+     *
+     * function add new data
+     * 
+     * @access	public
+     * @return	html data
+     */
+    public function add()
+    {
+        if (isPostBack()) {
+            $this->form_validation->set_rules('add_name', 'State Name',  'trim|required|is_unique[states.name]');
+            $this->form_validation->set_rules('status', 'Status', 'required');
+            if ($this->form_validation->run() == FALSE) {
+            } else {
+                $postdata = array(
+                    'name'              => $_POST['add_name'],
+                    'status'            => $_POST['status'],
+                    'country_id'        => 101,
+                    'added_date'        => date('Y-m-d H:i:s'),
+                    'user_id'           => currentuserinfo()->id,
+                );
+                $this->state_mod->add($postdata);
+                set_flashdata('success', 'New State added successfully');
+                redirect('/master/state');
+            }
+        }
+        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Add State');
+        $data['title'] = WEBSITE_NAME . ' | State';
+        $data['page_title'] = 'Add State';
+        $page = 'state/add';
+        $data['page'] = $page;
+        _layout($data);
+    }
+
+    /**
+     * Edit
+     *
+     * this function update city
+     * 
+     * @access	public
+     * @return	html data
+     */
+    public function edit($id = "")
+    {
+        // pr($_POST);die;
+        $state_id = ID_decode($id);
+        if (isPostBack()) {
+            $state_id = ID_decode($id);
+            $this->form_validation->set_rules('add_name', 'State Name',  'trim|required');
+            $this->form_validation->set_rules('status', 'Status', 'required');
+
+            if ($this->form_validation->run() == FALSE) {
+            } else {
+                /*check name for pre existance*/
+                $city_name        =   $this->input->post('add_name');
+                $check_data         =   $this->state_mod->check_preexistance($state_id, $city_name);
+                /*End of this*/
+                if ($check_data) {
+                    set_flashdata('error', 'State name already exist.');
+                    redirect("/master/state/edit/$id");
+                } else {
+                    $this->state_mod->edit($state_id);
+                    set_flashdata('success', 'State name updated successfully');
+                    redirect('/master/state');
+                }
+            }
+        }
+        $data['result'] = $this->state_mod->view($state_id);
+        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Update State');
+        $data['title'] = WEBSITE_NAME . ' | State';
+        $data['page_title'] = 'Update State';
+        $page = 'state/add';
+        $data['page'] = $page;
+        _layout($data);
+    }
+
+
+    /**
+     * view function 
+     */
+    public function view($id = "")
+    {
+        $state_id = ID_decode($id);
+        if (!empty($state_id)) {
+            $data['result'] = $this->state_mod->view(@$state_id);
+            $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'View State');
+            $data['title'] = WEBSITE_NAME . ' | State';
+            $data['page_title'] = 'View State';
+            $page = 'state/view';
+            $data['page'] = $page;
+            _layout($data);
+        }
+    }
+
 
     public function view_all()
     {
@@ -45,7 +141,7 @@ class State extends CI_Controller
         /*End of counting warehouse data*/
         $citydata = $this->state_mod->get_data();
         $data   =   array();
-        if (count($citydata) > 0) {
+        if (!empty($citydata) && count($citydata) > 0) {
             $j = $requestData['start'];
             for ($i = 0; $i < count($citydata); $i++) {
                 $j++;
@@ -73,16 +169,16 @@ class State extends CI_Controller
     /**
      * deletecategories
      *
-     * this function delete State
+     * this function delete Data
      * 
      * @access	public
      * @return	html data
      */
-    public function delete_city()
+    public function deletedata()
     {
         $post = $this->input->post('id');
         if (!empty($post)) {
-            if ($this->state_mod->delete_city($post)) {
+            if ($this->state_mod->deletedata($post)) {
                 set_flashdata('success', 'State deleted successfully');
                 //redirect('/city');
             } else {
@@ -91,9 +187,9 @@ class State extends CI_Controller
         }
     }
     /**
-     * deletecategories
+     * Restore categories
      *
-     * this function delete State
+     * this function Restore Data
      * 
      * @access	public
      * @return	html data
