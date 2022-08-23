@@ -695,7 +695,6 @@ if (!function_exists('_sendMailPhpMailer')) {
 
     function _sendMailPhpMailer($email_data) {
         $CI = &get_instance();
-        pr($email_data); die;
         $to = $email_data['to'];
         $subject =  $email_data['subject'];
         $message =  $email_data['message'];
