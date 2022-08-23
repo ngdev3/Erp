@@ -151,5 +151,20 @@ class Auth extends CI_Controller
         return $token;
     }
 
+    /**
+     * logout
+     *
+     * This function to logout user
+     * 
+     * @access	public
+     * @return	html data
+     */
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        set_flashdata('success', 'Logout successfully !!!');
+        redirect(base_url());
+    }
+
     /*End of Function*/
 }

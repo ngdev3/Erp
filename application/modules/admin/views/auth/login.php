@@ -69,7 +69,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" name="remember" value="1" <?= (@$remember) ? "checked='true'" : "" ?>>
+                                <input type="checkbox" id="remember">
                                 <label for="remember">
                                     Remember Me
                                 </label>
