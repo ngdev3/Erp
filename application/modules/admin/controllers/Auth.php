@@ -101,11 +101,8 @@ class Auth extends CI_Controller
                         $email_data['from']         =   ADMIN_EMAIL;
                         $email_data['sender_name']  =  WEBSITE_NAME;
                         $email_data['subject']      =     "Password Reset";
-                        $email_data['message']      =     array(
-                            'header' => 'Password Reset !',
-                            'body' => 'Hello <strong style="font-weight: bolder;font-size: 14px;">' . ucfirst($rs_data['name']) . ', </strong>
-                                                     <br/><br><a href="' . base_url() . 'admin/auth/verifyToken/' . $token . "/" . email_encoded($email) . '"> Your Password Reset Link </a>.<br><br>Regards,<br/> ' . WEBSITE_NAME
-                        );
+                        $email_data['message']      =   'Hello <strong style="font-weight: bolder;font-size: 14px;">' . ucfirst($rs_data['name']) . ', </strong>
+                                                     <br/><br><a href="' . base_url() . 'admin/auth/verifyToken/' . $token . "/" . email_encoded($email) . '"> Your Password Reset Link </a>.<br><br>Regards,<br/> ' . WEBSITE_NAME;
 
                         echo _sendMailPhpMailer($email_data);
                         die;
