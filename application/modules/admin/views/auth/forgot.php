@@ -13,7 +13,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="card card-outline card-primary">
-           
+
             <div class="card-body">
                 <?= get_flashdata() ?>
                 <p class="login-box-msg">
@@ -23,9 +23,9 @@
                     <h4 class="fw-300 c-grey-900 mB-30" style="font-weight:bold !important;font-size: 25px;color: #1a7fd0 !important; text-align:center">C R Industries </h4>
                 </div>
 
-                <form action="recover-password.html" method="post">
+                <form method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" name="email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
