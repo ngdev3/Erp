@@ -51,6 +51,7 @@ class Auth extends CI_Controller
                 $email      =   $this->input->post('email', true);
                 $password   =   $this->input->post('password', true);
                 $rs_data    =   $this->Auth_mod->login_authorize();
+                
                 if ($rs_data['status'] == "success") {
                     $this->session->set_userdata("userinfo", $rs_data['result']);
                     $this->session->set_userdata("isLogin", 'yes');
@@ -70,11 +71,84 @@ class Auth extends CI_Controller
                     }
                     redirect(base_url('admin/dashboard'), 'refresh');
                 }
+                if ($rs_data['error_msg'] != '') {
+                    $this->session->set_flashdata("error", $rs_data['error_msg']);
+                }
             }
         }
+
         $data['title'] = WEBSITE_NAME . ' | Login';
         $data['page_title'] = 'User Login';
         $this->load->view('auth/login', $data);
     }
+
+    public function forgot()
+    {
+        $token   =   $this->getToken(50);
+        if ($this->session->userdata('isLogin') == 'yes') {
+            redirect(base_url('admin/dashboard'));
+        } else {
+            if (isPostBack()) {
+
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+                if ($this->form_validation->run()) {
+                    $arr        =   $this->input->post(null, true);
+                    $email      =   $this->input->post('email', true);
+                    $rs_data    =   $this->Auth_mod->forgot($token);
+
+                    if ($rs_data['valid']) {
+                        $email_data['to']           =   $email;
+                        $email_data['from']         =   ADMIN_EMAIL;
+                        $email_data['sender_name']  =  "Track (The Rest Accounting Key) Admin";
+                        $email_data['subject']      =     "Password Reset";
+                        $email_data['message']      =     array(
+                            'header' => 'Password Reset !',
+                            'body' => 'Hello <strong style="font-weight: bolder;font-size: 14px;">' . ucfirst($rs_data['name']) . ', </strong>
+                                                     <br/><br><a href="' . base_url() . 'admin/auth/verifyToken/' . $token . "/" . email_encoded($email) . '"> Your Password Reset Link </a>.<br><br>Regards,<br/>Team Track (The Rest Accounting Key)'
+                        );
+
+                        _sendMailPhpMailer($email_data);
+                        set_flashdata('success', 'Your Reset password link has been send to your Email Address.');
+                        redirect(base_url() . 'admin/auth/forgot');
+                    } else {
+                        set_flashdata('error', 'Please enter correct Email Address.');
+                        redirect(base_url() . 'admin/auth/forgot');
+                    }
+                } else {
+
+                    $data['title'] = 'Track (The Rest Accounting Key) || Forgot';
+                    $this->load->view('auth/forgot', $data);
+                }
+            } else {
+                $data['title'] = 'Track (The Rest Accounting Key) || Forgot';
+                $this->load->view('auth/forgot', $data);
+            }
+        }
+    }
+
+    /**
+     *Forget
+     *
+     * This function send password to user mail in case forget
+     * 
+     * @access	public
+     * @return	html data
+     */
+    function getToken($length)
+    {
+        $token = "";
+        $codeAlphabet = "KJDASKFJSGLENWELFGYUZDKVAJFVGKUOQIWTEYWEBFSDNVMNMXCSIUFYKSDBFJSGHDFSFBJH";
+        $codeAlphabet .= "abcdefghijklmnopqrstujfytfr8t98876gkjhgfuz";
+        $codeAlphabet .= "441321165887954321452100215231";
+        $max = strlen($codeAlphabet); // edited
+
+        for ($i = 0; $i < $length; $i++) {
+            $token .= $codeAlphabet[rand(0, $max - 1)];
+        }
+
+        return $token;
+    }
+
     /*End of Function*/
 }
