@@ -707,50 +707,9 @@ if (!function_exists('_sendMailPhpMailer')) {
             $CI->email->initialize($config);
             $CI->email->from('tekshapers.rajat@gmail.com');
             $CI->email->to('tekshapers.rajat@gmail.com'); 
-
-            // if(@$email_data['to']!=''){
-            // }
-            
-            // if(@$email_data['cc']!=''){
-            //     $CI->email->cc(@$email_data['cc']);
-            // }
-        
-            // if(@$email_data['bcc']!=''){
-            //     $CI->email->bcc(@$email_data['bcc']); 
-            // }
-        
-            // $i=0;
-            // if(@$email_data['file']!=''){
-            //     if(is_array(@$email_data['file']) && count(@$email_data['file'])>0){
-            //         $arr_files   =   array();
-            //         $arr_files   =   @$email_data['file'];
-            //         $arr_files_name   =   @$email_data['file_name'];
-            //         foreach($arr_files as $file){
-            //             $CI->email->attach($file,'attachment',$arr_files_name[$i]);
-            //             $i++;
-            //         }
-                
-            //     }else{
-                    
-            //         $CI->email->attach($email_data['file'],'attachment',@$email_data['file_name']);  
-            //     }
-            
-            // }
-            
             $CI->email->subject(ucfirst('Yes'));
-            // $data['message']    =   'sfsdfsdfsdf';//$email_data['message'];
-            // if(isset($email_data['cmp_logo'])){
-            //     $data['cmp_logo']   =   @$email_data['cmp_logo'];
-            // }else{
-            //     $data['cmp_logo']   =   @currentuserinfo()->cmp_logo;
-            // }
-       
-           // $msg = $CI->load->view('email_template/email_layout', $data, true);
+
             $CI->email->message('jkjkkjhkjh');
-                pr($CI->email->send());
-            pr(error_get_last());
-                echo "-------------";
-            die;
             if (true) {
                 return TRUE;
             } else {
@@ -2435,5 +2394,3 @@ function getdata($attributes) {
 }
 
     /* End of function */
-?>
-

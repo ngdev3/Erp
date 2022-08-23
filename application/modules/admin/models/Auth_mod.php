@@ -50,5 +50,54 @@ class Auth_mod extends CI_Model
         $data['status'] = 'error';
         return $data;
     }
+
+    /**
+     * forget
+     *
+     * This function set password and send verification mail
+     * 
+     * @access	public
+     * @return	mixed Array 
+     */
+    function forgot($token)
+    {
+        $this->form_validation->set_rules('email', "Email Id", 'trim|required|valid_email');
+        $email  =   $this->input->post('email', true);
+        if ($this->form_validation->run() === false) {
+            $return['error_msg']    =   validation_errors();
+            $return['valid']        =    false;
+            return $return;
+        }
+        $this->db->where("email", $email);
+        $this->db->where("status", 'Active');
+        $result    = $this->db->get($this->user_table);
+        if ($result->num_rows() > 0) {
+
+            $userData       =    $result->row();
+            if ($userData->user_type != 1 || $userData->user_type != 2) {
+                $name           =    $userData->first_name . ' ' . $userData->last_name;
+                //------------- secure encryption-------------------
+                $updateData            =    array(
+                    'password' => '',
+                    'token'  =>  $token,
+                    'token_valid' => date('Y-m-d')
+                );
+                $this->db->where('id', $userData->id);
+                $this->db->update($this->user_table, $updateData);
+
+                $return['valid']        =   true;
+                $return['name']             =   $name;
+                return $return;
+            } else {
+                $return['valid']        =    false;
+                $return['name']         =   "Invalid credentials!";
+                return $return;
+            }
+        } else {
+
+            $return['valid']        =    false;
+            return $return;
+        }
+    }
     /* End of function */
 }

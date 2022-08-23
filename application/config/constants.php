@@ -107,7 +107,7 @@ define('SENDERID','');
 
 
 
-define('ADMIN_EMAIL',"test.thealternativeaccount@gmail.com");
+define('ADMIN_EMAIL',"tekshapers.rajat@gmail.com");
 define('ADMIN_NAME',"Admin");
 define('API_KEY','A4646gth5674');
 
