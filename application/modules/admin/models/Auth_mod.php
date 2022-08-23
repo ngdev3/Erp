@@ -99,5 +99,55 @@ class Auth_mod extends CI_Model
             return $return;
         }
     }
+
+    public function tokenVerification($token, $email)
+    {
+        $this->db->select('*');
+        $this->db->where('email', $email);
+        $this->db->where('token', $token);
+        $this->db->from('users');
+        $query = $this->db->get();
+
+        $date_diff = date_diff(date_create($query->row()->token_valid), date_create(date('Y-m-d')));
+        $ValidAt    =   $date_diff->format("%a");
+
+        if ($ValidAt <= 2) {
+            if ($query->num_rows() == 1) {
+                $return['uid']        =   $query->row()->id;
+                $return['valid']        =   true;
+                return $return;
+            } else {
+                $return['msg']        =  'Invalid Token';
+                $return['valid']        =   false;
+                return $return;
+            }
+        } else {
+            $return['valid']        =   false;
+            $return['msg']        =  'Link Expired';
+            return $return;
+        }
+    }
+
+
+    public function updatedpassword($uid)
+    {
+        $data   =   array(
+            'password' => md5($_POST['new_password']),
+            'token' =>  '',
+            'token_valid' => '',
+            'updated_date' => date('Y-m-d H:i:s')
+        );
+        $this->db->where('id', $uid); //which row want to upgrade  
+        $this->db->update('users', $data);
+        if ($this->db->affected_rows() > 0) {
+            $return['valid']        =   true;
+            return $return;
+        } else {
+            $return['valid']        =   false;
+            return $return;
+        }
+    }
+
+
     /* End of function */
 }

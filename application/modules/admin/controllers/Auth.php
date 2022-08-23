@@ -119,6 +119,26 @@ class Auth extends CI_Controller
         }
     }
 
+    public function verifyToken($token, $email)
+    {
+        if ($this->session->userdata('isLogin') == 'yes') {
+            redirect(base_url('admin/dashboard'));
+        } else {
+            if (isset($token) && isset($email)) {
+                $rs_data    =   $this->Auth_mod->tokenVerification($token, email_decoded($email));
+                if ($rs_data['valid']) {
+                    $this->session->set_userdata('authenticate', '200');
+                    $this->session->set_userdata('uid', $rs_data['uid']);
+                    redirect(base_url() . 'admin/auth/changePassword');
+                } else {
+                    $this->session->set_userdata('authenticate', '400');
+                    set_flashdata('error', $rs_data['msg']);
+                    redirect(base_url() . 'admin/auth/forgot');
+                }
+            }
+        }
+    }
+
     /**
      *Forget
      *
@@ -140,6 +160,47 @@ class Auth extends CI_Controller
         }
 
         return $token;
+    }
+
+
+    public function changePassword()
+    {
+        if (isPostBack()) {
+            $this->form_validation->set_rules('new_password', 'New Password', 'trim|required');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[new_password]');
+            if ($this->form_validation->run() === false) {
+                $data['status'] = "error";
+                $data['error_msg']    =    validation_errors();
+            } else {
+                $user_id = $this->session->userdata('uid');
+                if (isset($user_id) && !empty($user_id)) {
+                    $this->session->unset_userdata('uid');
+                    $this->session->unset_userdata('authenticate');
+                    $result = $this->Auth_mod->updatedpassword($user_id);
+                    if ($result['valid']) {
+
+                        set_flashdata('success', 'You have successfully changed your password');
+                        redirect(base_url() . 'admin/auth/login');
+                    } else {
+                        set_flashdata('error', 'Something went wrong');
+                        redirect(base_url() . 'admin/auth/forgot');
+                    }
+                } else {
+                    set_flashdata('error', 'Something went wrong');
+                    redirect(base_url() . 'admin/auth/forgot');
+                }
+            }
+        } else {
+            if ($this->session->userdata('authenticate') != '200') {
+                $this->session->unset_userdata('authenticate');
+                redirect(base_url('admin/auth/forgot'));
+            } else {
+
+                $data['title'] = WEBSITE_NAME . ' | Forgot';
+                $data['page_title'] = 'User Forgot';
+                $this->load->view('auth/changepassword', $data);
+            }
+        }
     }
 
     /**
