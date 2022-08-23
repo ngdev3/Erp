@@ -35,8 +35,7 @@ class Admin extends CI_Controller {
     public function index()
     
 	{
-        $data['breadcum'] = array('a','b');
-        $this->load->view('welcome_message', $data);              
+        redirect(base_url('admin/auth/login'));             
             
 	}
         
