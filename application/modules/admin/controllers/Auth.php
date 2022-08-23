@@ -51,7 +51,7 @@ class Auth extends CI_Controller
                 $email      =   $this->input->post('email', true);
                 $password   =   $this->input->post('password', true);
                 $rs_data    =   $this->Auth_mod->login_authorize();
-                
+
                 if ($rs_data['status'] == "success") {
                     $this->session->set_userdata("userinfo", $rs_data['result']);
                     $this->session->set_userdata("isLogin", 'yes');
@@ -59,7 +59,7 @@ class Auth extends CI_Controller
 
                     $email_enc   =   custom_encryption($email, 'ak!@#s$on!', 'encrypt');
                     $password_enc   =   custom_encryption($password, 'ak!@#s$on!', 'encrypt');
-                    if ($remember) // set remember username and password in cookie 
+                    if ($remember) //Set remember username and password in cookies 
                     {
                         setcookie('fs_email', $email_enc, time() + (86400 * 30), "/");
                         setcookie('fs_password', $password_enc, time() + (86400 * 30), "/");
@@ -121,7 +121,8 @@ class Auth extends CI_Controller
                     $this->load->view('auth/forgot', $data);
                 }
             } else {
-                $data['title'] = 'Track (The Rest Accounting Key) || Forgot';
+                $data['title'] = WEBSITE_NAME . ' | Login';
+                $data['page_title'] = 'User Login';
                 $this->load->view('auth/forgot', $data);
             }
         }
