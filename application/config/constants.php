@@ -126,6 +126,6 @@ define('SUPPORT_HELPLINE_USA','');
 define('SITE_URL_ORI','');
 
 /* Website Name */
-define('WEBSITE_NAME','CR Industries');
+define('WEBSITE_NAME','C R Industries');
 
 
