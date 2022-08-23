@@ -103,9 +103,7 @@ class Auth extends CI_Controller
                         $email_data['subject']      =     "Password Reset";
                         $email_data['message']      =   'Hello <strong style="font-weight: bolder;font-size: 14px;">' . ucfirst($rs_data['name']) . ', </strong>
                                                      <br/><br><a href="' . base_url() . 'admin/auth/verifyToken/' . $token . "/" . email_encoded($email) . '"> Your Password Reset Link Click me to Reset the Password</a>.<br><br>Regards,<br/> ' . WEBSITE_NAME;
-
                         echo _sendMailPhpMailer($email_data);
-                        die;
                         set_flashdata('success', 'Your Reset password link has been send to your Email Address.');
                         redirect(base_url() . 'admin/auth/login');
                     } else {
