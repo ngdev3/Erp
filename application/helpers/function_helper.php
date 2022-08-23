@@ -695,32 +695,20 @@ if (!function_exists('_sendMailPhpMailer')) {
 
     function _sendMailPhpMailer($email_data) {
         $CI = &get_instance();
-        $isCISendmail   =   $CI->config->item('sendmailCI');
-        if(!$isCISendmail){// mail send by CI sendmail
-            
-            $config['protocol'] = 'sendmail';
-            $config['mailpath'] = '/usr/sbin/sendmail';
-            $config['charset']  = 'iso-8859-1';
-            $config['wordwrap'] = true;
-            
-            $CI->email->set_mailtype("html");
-            $CI->email->initialize($config);
-            $CI->email->from('tekshapers.rajat@gmail.com');
-            $CI->email->to('tekshapers.rajat@gmail.com'); 
-            $CI->email->subject(ucfirst('Yes'));
-
-            $CI->email->message('jkjkkjhkjh');
-            if (true) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
-            
-        }else{
-            echo "ddddd";
+        pr($email_data); die;
+        $to = $email_data['to'];
+        $subject =  $email_data['subject'];
+        $message =  $email_data['message'];
+        $header = "From:admin@thecrindustries.com \r\n";
+        $header .= "Cc:rajatinvoice@gmail.com \r\n";
+        $header .= "MIME-Version: 1.0\r\n";
+        $header .= "Content-type: text/html\r\n";
+        $retval = mail ($to,$subject,$message,$header);
+        if( $retval == true ) {
+          return true;
+        }else {
+            return false;
         }
-        
-
     }
 }    
 /* End of Function */

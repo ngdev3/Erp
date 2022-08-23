@@ -107,7 +107,8 @@ class Auth extends CI_Controller
                                                      <br/><br><a href="' . base_url() . 'admin/auth/verifyToken/' . $token . "/" . email_encoded($email) . '"> Your Password Reset Link </a>.<br><br>Regards,<br/> ' . WEBSITE_NAME
                         );
 
-                        _sendMailPhpMailer($email_data);
+                        echo _sendMailPhpMailer($email_data);
+                        die;
                         set_flashdata('success', 'Your Reset password link has been send to your Email Address.');
                         redirect(base_url() . 'admin/auth/login');
                     } else {
@@ -117,27 +118,6 @@ class Auth extends CI_Controller
                 }
             }
 
-            $to = "abc@yopmail.com";
-         $subject = "This is subject";
-         
-         $message = "<b>This is HTML message.</b>";
-         $message .= "<h1>This is headline.</h1>";
-         
-         $header = "From:abc@somedomain.com \r\n";
-         $header .= "Cc:afgh@somedomain.com \r\n";
-         $header .= "MIME-Version: 1.0\r\n";
-         $header .= "Content-type: text/html\r\n";
-         
-         $retval = mail ($to,$subject,$message,$header);
-         
-         if( $retval == true ) {
-            echo "Message sent successfully...";
-         }else {
-            echo "Message could not be sent...";
-         }
-
-
-         die;
             $data['title'] = WEBSITE_NAME . ' | Forgot';
             $data['page_title'] = 'User Forgot';
             $this->load->view('auth/forgot', $data);
