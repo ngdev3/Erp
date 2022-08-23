@@ -6,16 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= (isset($title)) ? $title :  WEBSITE_NAME; ?></title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/fontawesome-free/css/all.min.css">
-    <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>dist/css/adminlte.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>dist/self/style.css">
+    <!-- Header -->
+    <?php $this->load->view('auth/auth_header') ?>
+
 </head>
 
 <body class="hold-transition login-page">
@@ -90,11 +83,9 @@
                         <button type="submit" class="btn btn-block btn-primary">Sign in</button>
                     </div>
                 </form>
-
                 <!-- /.social-auth-links -->
-
                 <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
+                    <a href="<?php echo base_url(); ?>admin/auth/forgot">I forgot my password</a>
                 </p>
             </div>
             <!-- /.login-card-body -->
@@ -102,12 +93,8 @@
     </div>
     <!-- /.login-box -->
 
-    <!-- jQuery -->
-    <script src="<?php echo base_url(); ?>plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="<?php echo base_url(); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="<?php echo base_url(); ?>dist/js/adminlte.min.js"></script>
+    <!-- Footer -->
+    <?php $this->load->view('auth/auth_footer') ?>
 </body>
 
 </html>
