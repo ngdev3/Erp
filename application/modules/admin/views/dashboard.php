@@ -80,11 +80,11 @@
                         <i class="fas fa-wrench"></i>
                       </button>
                       <div class="dropdown-menu dropdown-menu-right" role="menu">
-                        <a href="#" class="dropdown-item">Action</a>
-                        <a href="#" class="dropdown-item">Another action</a>
-                        <a href="#" class="dropdown-item">Something else here</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Something else here</a>
                         <a class="dropdown-divider"></a>
-                        <a href="#" class="dropdown-item">Separated link</a>
+                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                       </div>
                     </div>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
@@ -348,7 +348,7 @@
                       <div class="direct-chat-contacts">
                         <ul class="contacts-list">
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user1-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -363,7 +363,7 @@
                           </li>
                           <!-- End Contact Item -->
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user7-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -378,7 +378,7 @@
                           </li>
                           <!-- End Contact Item -->
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user3-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -393,7 +393,7 @@
                           </li>
                           <!-- End Contact Item -->
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user5-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -408,7 +408,7 @@
                           </li>
                           <!-- End Contact Item -->
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user6-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -423,7 +423,7 @@
                           </li>
                           <!-- End Contact Item -->
                           <li>
-                            <a href="#">
+                            <a href="javascript:void(0);">
                               <img class="contacts-list-img" src="<?php echo base_url(); ?>dist/img/user8-128x128.jpg" alt="User Avatar">
 
                               <div class="contacts-list-info">
@@ -480,42 +480,42 @@
                       <ul class="users-list clearfix">
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user1-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Alexander Pierce</a>
+                          <a class="users-list-name" href="javascript:void(0);">Alexander Pierce</a>
                           <span class="users-list-date">Today</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user8-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Norman</a>
+                          <a class="users-list-name" href="javascript:void(0);">Norman</a>
                           <span class="users-list-date">Yesterday</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user7-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Jane</a>
+                          <a class="users-list-name" href="javascript:void(0);">Jane</a>
                           <span class="users-list-date">12 Jan</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user6-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">John</a>
+                          <a class="users-list-name" href="javascript:void(0);">John</a>
                           <span class="users-list-date">12 Jan</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user2-160x160.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Alexander</a>
+                          <a class="users-list-name" href="javascript:void(0);">Alexander</a>
                           <span class="users-list-date">13 Jan</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user5-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Sarah</a>
+                          <a class="users-list-name" href="javascript:void(0);">Sarah</a>
                           <span class="users-list-date">14 Jan</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user4-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Nora</a>
+                          <a class="users-list-name" href="javascript:void(0);">Nora</a>
                           <span class="users-list-date">15 Jan</span>
                         </li>
                         <li>
                           <img src="<?php echo base_url(); ?>dist/img/user3-128x128.jpg" alt="User Image">
-                          <a class="users-list-name" href="#">Nadia</a>
+                          <a class="users-list-name" href="javascript:void(0);">Nadia</a>
                           <span class="users-list-date">15 Jan</span>
                         </li>
                       </ul>
@@ -716,7 +716,7 @@
                 <div class="card-footer p-0">
                   <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="javascript:void(0);" class="nav-link">
                         United States of America
                         <span class="float-right text-danger">
                           <i class="fas fa-arrow-down text-sm"></i>
@@ -724,7 +724,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="javascript:void(0);" class="nav-link">
                         India
                         <span class="float-right text-success">
                           <i class="fas fa-arrow-up text-sm"></i> 4%
@@ -732,7 +732,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="javascript:void(0);" class="nav-link">
                         China
                         <span class="float-right text-warning">
                           <i class="fas fa-arrow-left text-sm"></i> 0%
