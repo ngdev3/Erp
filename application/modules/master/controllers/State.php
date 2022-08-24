@@ -125,10 +125,17 @@ class State extends CI_Controller
     /**
      * view function 
      */
-    public function view($id = "")
+    public function view($id = "", $click = null)
     {
+
         $state_id = ID_decode($id);
         if (!empty($state_id)) {
+            if(!empty($click)){
+                $data['is_seen'] = 1;
+                $data['status'] = 'Inactive';
+                $this->db->where('id', $click);
+                $this->db->update('notification', $data);
+            }
             $data['result'] = $this->state_mod->view(@$state_id);
             $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'View State');
             $data['title'] = WEBSITE_NAME . ' | State';

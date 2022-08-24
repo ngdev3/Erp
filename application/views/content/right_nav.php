@@ -120,7 +120,7 @@
 					
 			?>
 					<div class="dropdown-divider"></div>
-					<a href="<?= base_url().$y->action;?>" class="dropdown-item">
+					<a href="<?= base_url().$y->action.'/'.$y->id;?>" class="dropdown-item">
 						<i class="fas fa-envelope mr-2"></i> <?= $y->name ?>
 						<span class="float-right text-muted text-sm"><?= $elapsed; ?></span>
 					</a>
