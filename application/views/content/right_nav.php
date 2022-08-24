@@ -107,7 +107,7 @@
 					$datetime2 = new DateTime($y->added_date);
 					$interval = $datetime1->diff($datetime2);
 					//pr($interval);
-					$elapsed = '';
+					$elapsed = '0 seconds';
 					if($interval->d > 0){
 						$elapsed = $interval->format('%a days');
 					}else if($interval->h > 0 && $interval->d == 0){
