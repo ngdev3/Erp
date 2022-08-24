@@ -32,6 +32,7 @@
                             </div>
                         </div>
                     </div>
+                    <span class="error"><?= form_error('email') ?></span>
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Request new password</button>

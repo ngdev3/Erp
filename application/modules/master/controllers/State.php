@@ -58,7 +58,16 @@ class State extends CI_Controller
                     'user_id'           => currentuserinfo()->id,
                 );
                 $this->state_mod->add($postdata);
-                set_flashdata('success', 'New State added successfully');
+                $flash_message = 'New State added';
+                $title = '<b>' . ucfirst($_POST['add_name']) . '</b> State added';
+                $action = 'master/state/view/' . ID_encode($this->db->insert_id());
+                $data =  array(
+                    "title" => $title,
+                    "action" => $action,
+                    "flash_message" => $flash_message
+                );
+                notificationData($data);
+                set_flashdata('success', $flash_message);
                 redirect('/master/state');
             }
         }

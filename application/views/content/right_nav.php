@@ -80,28 +80,54 @@
 		</div>
 	</li>
 	<!-- Notifications Dropdown Menu -->
+	<?php
+
+	$this->db->select("*");
+	$this->db->where('user_id', currentuserinfo()->id);
+	$this->db->where('is_seen', false);
+	$this->db->limit(10);  
+	$query = $this->db->get('notification');
+	$notificationSet = $query->result();
+
+
+	?>
 	<li class="nav-item dropdown">
 		<a class="nav-link" data-toggle="dropdown" href="javascript:void(0)">
 			<i class="far fa-bell"></i>
-			<span class="badge badge-warning navbar-badge">15</span>
+			<span class="badge badge-warning navbar-badge"><?= count($notificationSet); ?></span>
 		</a>
 		<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-			<span class="dropdown-item dropdown-header">15 Notifications</span>
-			<div class="dropdown-divider"></div>
-			<a href="javascript:void(0)" class="dropdown-item">
-				<i class="fas fa-envelope mr-2"></i> 4 new messages
-				<span class="float-right text-muted text-sm">3 mins</span>
-			</a>
-			<div class="dropdown-divider"></div>
-			<a href="javascript:void(0)" class="dropdown-item">
-				<i class="fas fa-users mr-2"></i> 8 friend requests
-				<span class="float-right text-muted text-sm">12 hours</span>
-			</a>
-			<div class="dropdown-divider"></div>
-			<a href="javascript:void(0)" class="dropdown-item">
-				<i class="fas fa-file mr-2"></i> 3 new reports
-				<span class="float-right text-muted text-sm">2 days</span>
-			</a>
+			<span class="dropdown-item dropdown-header"><?= count($notificationSet); ?> Notifications</span>
+
+			<?php
+
+			if (!empty($notificationSet)) {
+				foreach ($notificationSet as $x => $y) {
+					$datetime1 = new DateTime();
+					$datetime2 = new DateTime($y->added_date);
+					$interval = $datetime1->diff($datetime2);
+					//pr($interval);
+					$elapsed = '';
+					if($interval->d > 0){
+						$elapsed = $interval->format('%a days');
+					}else if($interval->h > 0 && $interval->d == 0){
+						$elapsed = $interval->format('%h hours');
+					}else if($interval->i > 0 && $interval->h == 0 && $interval->d == 0){
+						$elapsed = $interval->format('%i minutes');
+					}else if($interval->s > 0 && $interval->i == 0 && $interval->h == 0 && $interval->d == 0){
+						$elapsed = $interval->format('%s seconds');
+					} 
+					
+			?>
+					<div class="dropdown-divider"></div>
+					<a href="<?= base_url().$y->action;?>" class="dropdown-item">
+						<i class="fas fa-envelope mr-2"></i> <?= $y->name ?>
+						<span class="float-right text-muted text-sm"><?= $elapsed; ?></span>
+					</a>
+			<?php }
+			} ?>
+
+
 			<div class="dropdown-divider"></div>
 			<a href="javascript:void(0)" class="dropdown-item dropdown-footer">See All Notifications</a>
 		</div>
