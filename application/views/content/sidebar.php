@@ -21,6 +21,11 @@
 		</div>
 	</div>
 
+	<?php
+	$uri1 = @uri_segment(1);
+	$uri2 = @uri_segment(2);
+	$uri3 = @uri_segment(3);
+	?>
 	<!-- Sidebar Menu -->
 	<nav class="mt-2">
 		<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -34,7 +39,6 @@
 					<p>
 						Master
 						<i class="fas fa-angle-left right"></i>
-						<span class="badge badge-info right">6</span>
 					</p>
 				</a>
 				<ul class="nav nav-treeview">
@@ -43,12 +47,33 @@
 							<i class="far fa-circle nav-icon"></i>
 							<p>State Master</p>
 						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item ">
+								<a href="<?= base_url('master/state/add') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'state' && $uri3 == 'add') {
+									echo 'active';
+								} ?>">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Add</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?= base_url('master/state') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'state' && empty($uri3)) {
+									echo 'active';
+								} ?>">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Listing</p>
+								</a>
+							</li>
+						</ul>
 					</li>
 					<li class="nav-item">
 						<a href="pages/layout/top-nav-sidebar.html" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>City Master</p>
 						</a>
+
 					</li>
 					<li class="nav-item">
 						<a href="pages/layout/boxed.html" class="nav-link">
@@ -95,7 +120,7 @@
 				<a href="javascript:void(0)" class="nav-link">
 					<i class="nav-icon far fa-plus-square"></i>
 					<p>
-						Extras
+						User Management
 						<i class="fas fa-angle-left right"></i>
 					</p>
 				</a>
@@ -116,7 +141,10 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="pages/examples/register.html" class="nav-link">
+								<a href="<?= base_url('admin/user') ?>" class="nav-link 
+								<?php if ($uri1 == 'admin' && $uri2 == 'user' && empty($uri3)) {
+									echo 'active';
+								} ?>">
 									<i class="far fa-circle nav-icon"></i>
 									<p>Register v1</p>
 								</a>
