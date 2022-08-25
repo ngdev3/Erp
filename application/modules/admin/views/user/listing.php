@@ -8,7 +8,7 @@
            <div class="card-body">
              <div class="col-6"> </div>
              <div class="col-6 pull-right">
-               <a href="<?php echo base_url('master/state/add'); ?>" id="back-btn" class="btn btn-success">Add <?= ucfirst(@uri_segment(2)); ?></a>
+               <a href="<?php echo base_url($DefaultRedirectionWithHypan.'/add'); ?>" id="back-btn" class="btn btn-success">Add <?= ucfirst(@uri_segment(2)); ?></a>
              </div>
 
              <table id="datatable-grid" class="table table-bordered table-striped">

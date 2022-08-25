@@ -39,6 +39,7 @@ class User extends CI_Controller
         $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => $this->UpperCaseModuleName . ' Listing');
         $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
         $data['page_title'] = $this->UpperCaseModuleName . ' Management';
+        $data['DefaultRedirectionWithHypan'] = $this->DefaultRedirectionWithHypan;
         $page = $this->LowerCaseModuleName . '/listing';
         $data['page'] = $page;
         _layout($data);
