@@ -9,3 +9,7 @@
 .error{
     color: red;
 }
+
+.dropdown-menu-lg {
+    min-width: 528px;
+}

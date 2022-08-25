@@ -85,6 +85,7 @@
 	$this->db->select("*");
 	$this->db->where('user_id', currentuserinfo()->id);
 	$this->db->where('is_seen', false);
+	$this->db->order_by("id", "DESC");
 	$this->db->limit(10);  
 	$query = $this->db->get('notification');
 	$notificationSet = $query->result();
@@ -97,7 +98,7 @@
 			<span class="badge badge-warning navbar-badge"><?= count($notificationSet); ?></span>
 		</a>
 		<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-			<span class="dropdown-item dropdown-header"><?= count($notificationSet); ?> Notifications</span>
+			<span class="dropdown-item dropdown-header">Latest <?= count($notificationSet); ?> Notifications</span>
 
 			<?php
 
