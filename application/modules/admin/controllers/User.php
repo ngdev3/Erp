@@ -90,7 +90,7 @@ class User extends CI_Controller
                 );
                 $this->user_mod->add($postdata);
                 $flash_message = 'New ' . $this->UpperCaseModuleName . ' added';
-                $title = '<b>' . ucfirst($_POST['add_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
+                $title = '<b>' . ucfirst($_POST['first_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 $data =  array(
                     "title" => $title,
