@@ -73,7 +73,9 @@
 							</li>
 						</ul>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'city') {
+											echo 'menu-open';
+										} ?>">
 						<a href="<?= base_url('master/city') ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
 							<p>City Master</p>

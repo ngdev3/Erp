@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends CI_Controller
+class City extends CI_Controller
 {
 
-    var $UpperCaseModuleName = 'User';
-    var $LowerCaseModuleName = 'user';
-    var $DefaultRedirection = '/admin/user';
-    var $DefaultRedirectionWithHypan = 'admin/user';
+    var $UpperCaseModuleName = 'City';
+    var $LowerCaseModuleName = 'city';
+    var $DefaultRedirection = '/master/city';
+    var $DefaultRedirectionWithHypan = 'master/city';
 
     /**
      * Constructor
@@ -15,7 +15,7 @@ class User extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('user_mod');
+        $this->load->model('city_mod');
     }
 
     /* End of constructor */
@@ -88,7 +88,7 @@ class User extends CI_Controller
                     'status'                    => $_POST['status'],
                     'added_date'                => date('Y-m-d H:i:s'),
                 );
-                $this->user_mod->add($postdata);
+                $this->city_mod->add($postdata);
                 $flash_message = 'New ' . $this->UpperCaseModuleName . ' added';
                 $title = '<b>' . ucfirst($_POST['first_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
@@ -162,7 +162,7 @@ class User extends CI_Controller
                 /*check name for pre existance*/
                 
                 $city_name        =   $this->input->post('email');
-                $check_data         =   $this->user_mod->check_preexistance($state_id, $city_name);
+                $check_data         =   $this->city_mod->check_preexistance($state_id, $city_name);
                 /*End of this*/
                 if ($check_data) {
                     set_flashdata('error', $this->UpperCaseModuleName . ' name already exist.');
@@ -174,14 +174,14 @@ class User extends CI_Controller
                         'last_name'                 => $_POST['last_name'],
                         'password'                  => md5($_POST['password']),
                     );
-                    $this->user_mod->edit($state_id);
+                    $this->city_mod->edit($state_id);
                     $this->sendEmail($_POST['email'], $postdata, 2);
                     set_flashdata('success', $this->UpperCaseModuleName . ' name updated successfully');
                     redirect($this->DefaultRedirection);
                 }
             }
         }
-        $data['result'] = $this->user_mod->view($state_id);
+        $data['result'] = $this->city_mod->view($state_id);
         $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Update ' . $this->UpperCaseModuleName);
         $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
         $data['page_title'] = 'Update ' . $this->UpperCaseModuleName;
@@ -205,7 +205,7 @@ class User extends CI_Controller
                 $this->db->where('id', $click);
                 $this->db->update('notification', $data);
             }
-            $data['result'] = $this->user_mod->view(@$state_id);
+            $data['result'] = $this->city_mod->view(@$state_id);
             $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'View ' . $this->UpperCaseModuleName);
             $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
             $data['page_title'] = 'View ' . $this->UpperCaseModuleName;
@@ -220,11 +220,13 @@ class User extends CI_Controller
     {
         $requestData    = 0; //$this->input->post(null, true);
         /*Counting warehouse data*/
-        $query          =   $this->user_mod->count_data();
+        $query          =   $this->city_mod->count_data();
         $totalData      =   $query->num_rows();
         $totalFiltered  =   $totalData;  //
         /*End of counting warehouse data*/
-        $citydata = $this->user_mod->get_data();
+        $citydata = $this->city_mod->get_data();
+        // pr($citydata); 
+        // die;
         $data   =   array();
         if (!empty($citydata) && count($citydata) > 0) {
             $j = $requestData['start'];
@@ -233,12 +235,9 @@ class User extends CI_Controller
                 $row    =   (array)$citydata[$i];
                 $nestedData     =   array();
                 $nestedData[]   =   $j;
-                $nestedData[]   =   $row["first_name"] . ' ' . $row["last_name"];
-                $nestedData[]   =   $row["email"];
-                $nestedData[]   =   $row["mobile_no"];
-                $nestedData[]   =   $row["designation"];
+                $nestedData[]   =   $row["name"];
+                $nestedData[]   =   'skdjf';
                 $nestedData[]   =   $row["status"];
-                $state_id        =   $row['id'];
                 $nestedData[]   =   $this->load->view($this->LowerCaseModuleName . "/_action", array("row" => $row, 'DefaultRedirectionWithHypan' => $this->DefaultRedirectionWithHypan), true);
                 $data[]         =   $nestedData;
             }
@@ -266,7 +265,7 @@ class User extends CI_Controller
     {
         $post = $this->input->post('id');
         if (!empty($post)) {
-            if ($this->user_mod->deletedata($post)) {
+            if ($this->city_mod->deletedata($post)) {
                 set_flashdata('success', $this->UpperCaseModuleName . ' deleted successfully');
                 //redirect('/city');
             } else {
@@ -286,7 +285,7 @@ class User extends CI_Controller
     {
         $post = $this->input->post('id');
         if (!empty($post)) {
-            if ($this->user_mod->restoreData($post)) {
+            if ($this->city_mod->restoreData($post)) {
                 set_flashdata('success', $this->UpperCaseModuleName . ' Restored successfully');
                 //redirect('/city');
             } else {
