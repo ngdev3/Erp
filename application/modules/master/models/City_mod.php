@@ -1,9 +1,9 @@
 <?php
 
-class User_mod extends CI_Model
+class City_mod extends CI_Model
 {
 
-    var $tableName = 'users';
+    var $tableName = 'city';
     function __construct()
     {
         parent::__construct();
@@ -20,6 +20,7 @@ class User_mod extends CI_Model
     function count_data()
     {
         $this->db->select('*');
+        $this->db->limit(500);
         return $query = $this->db->get($this->tableName);
     }
 
@@ -27,7 +28,7 @@ class User_mod extends CI_Model
     {
 
         $this->db->select('*');
-        $this->db->where('user_type !=',1);
+        $this->db->limit(500);
         $this->db->from($this->tableName);
         $query = $this->db->get();
         if ($query->num_rows()) {
