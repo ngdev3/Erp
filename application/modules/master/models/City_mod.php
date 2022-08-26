@@ -20,6 +20,7 @@ class City_mod extends CI_Model
     function count_data()
     {
         $this->db->select('*');
+        $this->db->join('states acn','acn.id = '.$this->tableName.'.state_id','left');
         $this->db->limit(500);
         return $query = $this->db->get($this->tableName);
     }
@@ -27,7 +28,8 @@ class City_mod extends CI_Model
     function get_data()
     {
 
-        $this->db->select('*');
+        $this->db->select($this->tableName.'.id as city_id, '.$this->tableName.'.status as city_status, '.$this->tableName.'.name as city_name, acn.name as state_name');
+        $this->db->join('states acn','acn.id = '.$this->tableName.'.state_id','left');
         $this->db->limit(500);
         $this->db->from($this->tableName);
         $query = $this->db->get();
@@ -67,7 +69,7 @@ class City_mod extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('id !=', $id);
-        $this->db->where('email ', $city_name);
+        $this->db->where('name ', $city_name);
         $query = $this->db->get($this->tableName);
         //  echo $this->db->last_query();
         return $query->num_rows();
@@ -79,20 +81,11 @@ class City_mod extends CI_Model
     {
         $postdata = array(
 
-            'first_name'                => $_POST['first_name'],
-            'first_name'                => $_POST['first_name'],
-            'last_name'                 => $_POST['last_name'],
-            'email'                     => $_POST['email'],
-            'mobile_no'                 => $_POST['mobile_no'],
-            'password'                  => md5($_POST['password']),
-            'pan_number'                => $_POST['pan_number'],
-            'aadhar_number'             => $_POST['aadhar_number'],
-            'designation'               => $_POST['designation'],
-            'address'                   => $_POST['address'],
-            'group_id'                  => $_POST['group_id'],
-            'user_type'                 => $_POST['user_type'],
+            'name'                      => $_POST['city_name'],
+            'state_id'                  => $_POST['state'],
             'status'                    => $_POST['status'],
             'updated_date'                => date('Y-m-d H:i:s'),
+            'user_id'                   => currentuserinfo()->id,
         );
         $this->db->where('id', $id);
         $this->db->update($this->tableName, $postdata);
@@ -102,7 +95,9 @@ class City_mod extends CI_Model
     //  THIS FUNCTION VIEW city DATA
     function view($id) {
         $this->db->select('*');
-        $this->db->where('id', $id);
+        $this->db->select($this->tableName.'.id as id, '.$this->tableName.'.status as status, '.$this->tableName.'.name as name, acn.name as state_name, acn.id as state_id');
+        $this->db->join('states acn','acn.id = '.$this->tableName.'.state_id','left');
+        $this->db->where($this->tableName.'.id', $id);
         return $query = $this->db->get($this->tableName)->row();
     }
 

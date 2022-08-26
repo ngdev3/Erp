@@ -16,6 +16,7 @@ class City extends CI_Controller
     {
         parent::__construct();
         $this->load->model('city_mod');
+        $this->load->model('state_mod');
     }
 
     /* End of constructor */
@@ -56,48 +57,29 @@ class City extends CI_Controller
     public function add()
     {
         if (isPostBack()) {
-            // pr($_POST);
-            // die;
-            $this->form_validation->set_rules('first_name', 'First Name',  'trim|required');
-            $this->form_validation->set_rules('last_name', 'Last Name',  'trim|required');
-            $this->form_validation->set_rules('mobile_no', 'Mobile Number',  'trim|required');
-            $this->form_validation->set_rules('password', 'Password',  'trim|required');
-            $this->form_validation->set_rules('pan_number', 'Pan Number',  'trim|required');
-            $this->form_validation->set_rules('aadhar_number', 'Aadhar Card number',  'trim|required');
-            $this->form_validation->set_rules('designation', 'Designation',  'trim|required');
-            $this->form_validation->set_rules('address', 'Address',  'trim|required');
-            $this->form_validation->set_rules('group_id', 'group_id',  'trim|required');
-            $this->form_validation->set_rules('user_type', 'user_type',  'trim|required');
-            $this->form_validation->set_rules('email', 'Email Id',  'trim|required|is_unique[users.email]');
+
+            $this->form_validation->set_rules('city_name', 'City Name',  'trim|required|is_unique[city.name]');
+            $this->form_validation->set_rules('state', 'State Name',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
             if ($this->form_validation->run() == FALSE) {
             } else {
                 $postdata = array(
 
-                    'first_name'                => $_POST['first_name'],
-                    'last_name'                 => $_POST['last_name'],
-                    'email'                     => $_POST['email'],
-                    'mobile_no'                 => $_POST['mobile_no'],
-                    'password'                  => md5($_POST['password']),
-                    'pan_number'                => $_POST['pan_number'],
-                    'aadhar_number'             => $_POST['aadhar_number'],
-                    'designation'               => $_POST['designation'],
-                    'address'                   => $_POST['address'],
-                    'group_id'                  => $_POST['group_id'],
-                    'user_type'                 => $_POST['user_type'],
+                    'name'                      => $_POST['city_name'],
+                    'state_id'                  => $_POST['state'],
                     'status'                    => $_POST['status'],
                     'added_date'                => date('Y-m-d H:i:s'),
+                    'user_id'                   => currentuserinfo()->id,
                 );
                 $this->city_mod->add($postdata);
                 $flash_message = 'New ' . $this->UpperCaseModuleName . ' added';
-                $title = '<b>' . ucfirst($_POST['first_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
+                $title = '<b>' . ucfirst($_POST['city_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 $data =  array(
                     "title" => $title,
                     "action" => $action,
                     "flash_message" => $flash_message
                 );
-                $this->sendEmail($_POST['email'], $postdata, 0);
                 notificationData($data);
                 set_flashdata('success', $flash_message);
                 redirect($this->DefaultRedirection);
@@ -106,6 +88,7 @@ class City extends CI_Controller
         $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Add ' . $this->UpperCaseModuleName);
         $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
         $data['page_title'] = 'Add ' . $this->UpperCaseModuleName;
+        $data['state_list'] = $this->state_mod->get_data();
         $page = $this->LowerCaseModuleName . '/add';
         $data['page'] = $page;
         _layout($data);
@@ -113,7 +96,7 @@ class City extends CI_Controller
 
     public function sendEmail($email, $rs_data, $type)
     {
-        if($type == 2){
+        if ($type == 2) {
             $email_data['to']           =   $email;
             $email_data['from']         =   ADMIN_EMAIL;
             $email_data['sender_name']  =  WEBSITE_NAME;
@@ -144,44 +127,28 @@ class City extends CI_Controller
         // pr($_POST);die;
         $state_id = ID_decode($id);
         if (isPostBack()) {
-            $this->form_validation->set_rules('first_name', 'First Name',  'trim|required');
-            $this->form_validation->set_rules('last_name', 'Last Name',  'trim|required');
-            $this->form_validation->set_rules('mobile_no', 'Mobile Number',  'trim|required');
-            $this->form_validation->set_rules('password', 'Password',  'trim|required');
-            $this->form_validation->set_rules('pan_number', 'Pan Number',  'trim|required');
-            $this->form_validation->set_rules('aadhar_number', 'Aadhar Card number',  'trim|required');
-            $this->form_validation->set_rules('designation', 'Designation',  'trim|required');
-            $this->form_validation->set_rules('address', 'Address',  'trim|required');
-            $this->form_validation->set_rules('group_id', 'group_id',  'trim|required');
-            $this->form_validation->set_rules('user_type', 'user_type',  'trim|required');
-            $this->form_validation->set_rules('email', 'Email Id',  'trim|required');
+            $this->form_validation->set_rules('city_name', 'City Name',  'trim|required');
+            $this->form_validation->set_rules('state', 'State Name',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
-
             if ($this->form_validation->run() == FALSE) {
             } else {
-                /*check name for pre existance*/
-                
-                $city_name        =   $this->input->post('email');
+
+                $city_name        =   $this->input->post('city_name');
                 $check_data         =   $this->city_mod->check_preexistance($state_id, $city_name);
                 /*End of this*/
                 if ($check_data) {
                     set_flashdata('error', $this->UpperCaseModuleName . ' name already exist.');
                     redirect($this->DefaultRedirection . "/edit/$id");
                 } else {
-                    $postdata = array(
-
-                        'first_name'                => $_POST['first_name'],
-                        'last_name'                 => $_POST['last_name'],
-                        'password'                  => md5($_POST['password']),
-                    );
+                   
                     $this->city_mod->edit($state_id);
-                    $this->sendEmail($_POST['email'], $postdata, 2);
                     set_flashdata('success', $this->UpperCaseModuleName . ' name updated successfully');
                     redirect($this->DefaultRedirection);
                 }
             }
         }
         $data['result'] = $this->city_mod->view($state_id);
+        $data['state_list'] = $this->state_mod->get_data();
         $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Update ' . $this->UpperCaseModuleName);
         $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
         $data['page_title'] = 'Update ' . $this->UpperCaseModuleName;
@@ -225,8 +192,7 @@ class City extends CI_Controller
         $totalFiltered  =   $totalData;  //
         /*End of counting warehouse data*/
         $citydata = $this->city_mod->get_data();
-        // pr($citydata); 
-        // die;
+        // pr($citydata); die;
         $data   =   array();
         if (!empty($citydata) && count($citydata) > 0) {
             $j = $requestData['start'];
@@ -235,9 +201,9 @@ class City extends CI_Controller
                 $row    =   (array)$citydata[$i];
                 $nestedData     =   array();
                 $nestedData[]   =   $j;
-                $nestedData[]   =   $row["name"];
-                $nestedData[]   =   'skdjf';
-                $nestedData[]   =   $row["status"];
+                $nestedData[]   =   $row["city_name"];
+                $nestedData[]   =   $row['state_name'];
+                $nestedData[]   =   $row["city_status"];
                 $nestedData[]   =   $this->load->view($this->LowerCaseModuleName . "/_action", array("row" => $row, 'DefaultRedirectionWithHypan' => $this->DefaultRedirectionWithHypan), true);
                 $data[]         =   $nestedData;
             }
