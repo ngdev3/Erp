@@ -27,7 +27,7 @@ date_default_timezone_set('Asia/Kolkata');
 */
 // print_r($_SERVER);
 // die;
-if( $_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.online'){
+if( $_SERVER['SERVER_NAME'] == 'erp.thecrindustries.com' || $_SERVER['SERVER_NAME'] == 'www.erp.thecrindustries.com'){
     
     $config['base_url'] = 'https://'.$_SERVER['HTTP_HOST'];
 }else{
