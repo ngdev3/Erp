@@ -197,7 +197,7 @@ class User extends CI_Controller
     public function view($id = "", $click = null)
     {
 
-        pr($id); die;
+    //    pr($id); die;
         $state_id = ID_decode($id);
         if (!empty($state_id)) {
             if (!empty($click)) {
@@ -207,7 +207,7 @@ class User extends CI_Controller
                 $this->db->update('notification', $data);
             }
             $data['result'] = $this->user_mod->view(@$state_id);
-            pr($data); die;
+          //  pr($data); die;
             $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'View ' . $this->UpperCaseModuleName);
             $data['title'] = WEBSITE_NAME . ' | ' . $this->UpperCaseModuleName;
             $data['page_title'] = 'View ' . $this->UpperCaseModuleName;
