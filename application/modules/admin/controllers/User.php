@@ -91,7 +91,7 @@ class User extends CI_Controller
                 $this->user_mod->add($postdata);
                 $flash_message = 'New ' . $this->UpperCaseModuleName . ' added';
                 $title = '<b>' . ucfirst($_POST['first_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
-                $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_decode($this->db->insert_id());
+                $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 $data =  array(
                     "title" => $title,
                     "action" => $action,
@@ -197,7 +197,7 @@ class User extends CI_Controller
     public function view($id = "", $click = null)
     {
 
-    //    pr($id); die;
+       pr($id); die;
         $state_id = ID_decode($id);
         if (!empty($state_id)) {
             if (!empty($click)) {
