@@ -7,12 +7,37 @@ if (!defined('BASEPATH'))
  * Database helper
  *
  * @package		Helpers
- * @category            database helper
- * @author		Ankit Rajput
- * @website		http://www.thealternativeaccount.com
- * @company             thealternativeaccount Inc 
+ * @category    database helper
+ * @author		Rajat Gupta
  * @since		Version 1.0
  */
+
+
+ 
+/**
+ * Get The GST Tax Slab
+ *
+ * This function Get The GST Tax Slab
+ *
+ * @param	
+ * @return
+ */
+if (!function_exists('getGST')) {
+
+    function getGST()
+    {
+        $CI = &get_instance();
+        $CI->db->select('*');
+        $CI->db->from('gstslab');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+}
+
 
 /**
  * is_adminprotected
