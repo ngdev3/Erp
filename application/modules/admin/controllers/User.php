@@ -197,7 +197,7 @@ class User extends CI_Controller
     public function view($id = "", $click = null)
     {
 
-       pr($id); die;
+    //   pr($id); die;
         $state_id = ID_decode($id);
         if (!empty($state_id)) {
             if (!empty($click)) {

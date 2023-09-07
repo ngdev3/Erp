@@ -31,7 +31,7 @@
                                                     <?php if (!empty($state_list)) {
                                                         foreach ($state_list as $x => $y) { ?>
                                                         
-                                                            <option value="<?php echo $y->id; ?>" <?php if($y->id==$result->state_id){echo "selected";} ?>><?php echo $y->name; ?></option>
+                                                            <option value="<?php echo $y->id; ?>" <?php if($y->id==@$result->state_id){echo "selected";} ?>><?php echo $y->name; ?></option>
                                                     <?php }
                                                     }; ?>
 

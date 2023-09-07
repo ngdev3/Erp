@@ -47,7 +47,9 @@
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'state') {
 											echo 'menu-open';
 										} ?>">
-						<a href="<?= base_url('/master/state'); ?>" class="nav-link">
+						<a href="<?= base_url('/master/state'); ?>" class="nav-link  <?php if ($uri1 == 'master' && $uri2 == 'state') {
+											echo 'menu-open active';
+										} ?> ">
 							<i class="far fa-circle nav-icon"></i>
 							<p>State Master</p>
 							<i class="fas fa-angle-left right"></i>
@@ -76,7 +78,9 @@
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'city') {
 											echo 'menu-open';
 										} ?>">
-						<a href="<?= base_url('master/city') ?>" class="nav-link">
+						<a href="<?= base_url('master/city') ?>" class="nav-link  <?php if ($uri1 == 'master' && $uri2 == 'city') {
+											echo 'active';
+										} ?>">
 							<i class="far fa-circle nav-icon"></i>
 							<p>City Master</p>
 							<i class="fas fa-angle-left right"></i>
@@ -104,7 +108,7 @@
 
 					</li>
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'item') {
-											echo 'menu-open';
+											echo 'menu-open active';
 										} ?>">
 						<a href="<?= base_url('master/item') ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>

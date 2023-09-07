@@ -4,6 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class State extends CI_Controller
 {
 
+    var $UpperCaseModuleName = 'State';
+    var $LowerCaseModuleName = 'state';
+    var $DefaultRedirection = '/master/state';
+    var $DefaultRedirectionWithHypan = 'master/state';
+
+
+
 
     /**
      * Constructor
@@ -58,15 +65,17 @@ class State extends CI_Controller
                     'user_id'           => currentuserinfo()->id,
                 );
                 $this->state_mod->add($postdata);
-                $flash_message = 'New State added';
                 $title = '<b>' . ucfirst($_POST['add_name']) . '</b> State added';
                 $action = 'master/state/view/' . ID_encode($this->db->insert_id());
+                
                 $data =  array(
-                    "title" => $title,
                     "action" => $action,
-                    "flash_message" => $flash_message
+                    "type" => "New",
+                    "module_title"=>$_POST['add_name'],
+                    "module_name"=>$this->UpperCaseModuleName,
+                    "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
-                notificationData($data);
+                notificationData($data,'added');
                 set_flashdata('success', $flash_message);
                 redirect('/master/state');
             }
@@ -107,6 +116,15 @@ class State extends CI_Controller
                     redirect("/master/state/edit/$id");
                 } else {
                     $this->state_mod->edit($state_id);
+                    $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
+                    $data =  array(
+                        "action" => $action,
+                        "type" => "",
+                        "module_title"=>$_POST['add_name'],
+                        "module_name"=>$this->UpperCaseModuleName,
+                        "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
+                    );
+                    notificationData($data,'Updated');
                     set_flashdata('success', 'State name updated successfully');
                     redirect('/master/state');
                 }

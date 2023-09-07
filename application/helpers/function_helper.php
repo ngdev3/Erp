@@ -1929,14 +1929,13 @@ function getdata($attributes)
 }
 
 if (!function_exists('notificationData')) {
-    function notificationData($data)
+    function notificationData($data,$type)
     {
         $CI = &get_instance();
-        //    pr($data); die;
-        $not['name'] = $data['title'];
+        $not['name'] =  $data['type'].' <b>'.$data['module_title'].'</b> '.$data['module_name'].' '.$type.' by '.$data['user_name'];
+        $not['remark'] = $data['type'].' '.$data['module_title'].' '.$data['module_name'].' '.$type.' by '.$data['user_name'];
         $not['user_id'] = currentuserinfo()->id;
         $not['action'] = $data['action'];
-        $not['remark'] = $data['flash_message'];
         $not['added_date'] =  date("Y-m-d H:i:s");
         $CI->db->insert('notification', $not);
         if ($CI->db->affected_rows() > 0) {

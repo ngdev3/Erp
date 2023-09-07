@@ -72,15 +72,17 @@ class City extends CI_Controller
                     'user_id'                   => currentuserinfo()->id,
                 );
                 $this->city_mod->add($postdata);
-                $flash_message = 'New ' . $this->UpperCaseModuleName . ' added';
                 $title = '<b>' . ucfirst($_POST['city_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 $data =  array(
-                    "title" => $title,
                     "action" => $action,
-                    "flash_message" => $flash_message
+                    "type" => "New",
+                    "module_title"=>$_POST['city_name'],
+                    "module_name"=>$this->UpperCaseModuleName,
+                    "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
                 notificationData($data);
+
                 set_flashdata('success', $flash_message);
                 redirect($this->DefaultRedirection);
             }
