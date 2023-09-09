@@ -65,7 +65,7 @@ class State extends CI_Controller
                     'user_id'           => currentuserinfo()->id,
                 );
                 $this->state_mod->add($postdata);
-                $title = '<b>' . ucfirst($_POST['add_name']) . '</b> State added';
+                $title = '<b>' . ucfirst($_POST['add_name']) . '</b> State added ';
                 $action = 'master/state/view/' . ID_encode($this->db->insert_id());
                 
                 $data =  array(
