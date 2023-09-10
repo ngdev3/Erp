@@ -1796,6 +1796,16 @@ function approve_by_user_type($approve_by)
 }
 
 
+function get_users_data($id)
+{
+    $CI = &get_instance();
+    $CI->db->select('*');
+    $CI->db->where('id', $id);
+    $result = $CI->db->get('users')->row();
+    return $result;
+}
+
+
 // get currency in words also
 
 function getIndianCurrency(float $number)

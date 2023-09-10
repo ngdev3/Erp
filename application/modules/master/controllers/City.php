@@ -81,8 +81,7 @@ class City extends CI_Controller
                     "module_name"=>$this->UpperCaseModuleName,
                     "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
-                notificationData($data);
-
+                notificationData($data,'added');
                 set_flashdata('success', $flash_message);
                 redirect($this->DefaultRedirection);
             }
@@ -144,6 +143,15 @@ class City extends CI_Controller
                 } else {
                    
                     $this->city_mod->edit($state_id);
+                    $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
+                    $data =  array(
+                        "action" => $action,
+                        "type" => "",
+                        "module_title"=>$_POST['city_name'],
+                        "module_name"=>$this->UpperCaseModuleName,
+                        "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
+                    );
+                    notificationData($data,'Updated');
                     set_flashdata('success', $this->UpperCaseModuleName . ' name updated successfully');
                     redirect($this->DefaultRedirection);
                 }

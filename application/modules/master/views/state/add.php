@@ -29,7 +29,7 @@
                                                 <select id="inputState2" class="form-control" name="status">
                                                     <?php
                                                     if (@$result->status == $val->status) {
-                                                        $selected = 'selected="selected"';
+                                                        
                                                     } ?>
                                                     <option value="Active" <?php if (@$result->status == 'Active') {
                                                                                 echo 'selected="selected"';
@@ -37,6 +37,9 @@
                                                     <option value="Inactive" <?php if (@$result->status == 'Inactive') {
                                                                                     echo 'selected="selected"';
                                                                                 } ?>>Inactive</option>
+                                                    <option value="Delete" <?php if (@$result->status == 'Delete') {
+                                                                                    echo 'selected="selected"';
+                                                                                } ?>>Delete</option>
 
                                                 </select>
 

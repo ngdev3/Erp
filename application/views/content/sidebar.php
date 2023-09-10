@@ -44,6 +44,7 @@
 					</p>
 				</a>
 				<ul class="nav nav-treeview">
+					
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'state') {
 											echo 'menu-open';
 										} ?>">
@@ -75,6 +76,7 @@
 							</li>
 						</ul>
 					</li>
+
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'city') {
 											echo 'menu-open';
 										} ?>">
@@ -107,6 +109,39 @@
 						</ul>
 
 					</li>
+
+					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'tax_slab') {
+											echo 'menu-open';
+										} ?>">
+						<a href="<?= base_url('master/tax_slab') ?>" class="nav-link <?php if ($uri1 == 'master' && $uri2 == 'tax_slab') {
+											echo 'active';
+										} ?>">
+							<i class="far fa-circle nav-icon"></i>
+							<p>GST Tax Slab Master</p>
+							<i class="fas fa-angle-left right"></i>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item ">
+								<a href="<?= base_url('master/tax_slab/add') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'tax_slab' && $uri3 == 'add') {
+									echo 'active';
+								} ?>">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Add</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?= base_url('master/tax_slab') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'tax_slab' && empty($uri3)) {
+									echo 'active';
+								} ?>">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Listing</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'item') {
 											echo 'menu-open active';
 										} ?>">
@@ -136,6 +171,7 @@
 							</li>
 						</ul>
 					</li>
+
 					<li class="nav-item">
 						<a href="<?= base_url('master/party_type') ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
@@ -155,34 +191,6 @@
 							<li class="nav-item">
 								<a href="<?= base_url('master/party_type') ?>" class="nav-link 
 								<?php if ($uri1 == 'master' && $uri2 == 'party_type' && empty($uri3)) {
-									echo 'active';
-								} ?>">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Listing</p>
-								</a>
-							</li>
-						</ul>
-					</li>
-
-					<li class="nav-item">
-						<a href="<?= base_url('master/tax_slab') ?>" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>
-							<p>GST Tax Slab Master</p>
-							<i class="fas fa-angle-left right"></i>
-						</a>
-						<ul class="nav nav-treeview">
-							<li class="nav-item ">
-								<a href="<?= base_url('master/tax_slab/add') ?>" class="nav-link 
-								<?php if ($uri1 == 'master' && $uri2 == 'tax_slab' && $uri3 == 'add') {
-									echo 'active';
-								} ?>">
-									<i class="far fa-circle nav-icon"></i>
-									<p>Add</p>
-								</a>
-							</li>
-							<li class="nav-item">
-								<a href="<?= base_url('master/tax_slab') ?>" class="nav-link 
-								<?php if ($uri1 == 'master' && $uri2 == 'tax_slab' && empty($uri3)) {
 									echo 'active';
 								} ?>">
 									<i class="far fa-circle nav-icon"></i>
@@ -247,6 +255,7 @@
 							</li>
 						</ul>
 					</li>
+
 					<li class="nav-item">
 						<a href="<?= base_url('master/gst_state_code') ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
@@ -274,6 +283,7 @@
 							</li>
 						</ul>
 					</li>
+
 				</ul>
 			</li>
 			<li class="nav-item <?php if ($uri1 == 'admin' && $uri2 == 'user') {

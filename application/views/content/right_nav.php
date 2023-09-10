@@ -99,7 +99,8 @@
 		</a>
 		<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 			<span class="dropdown-item dropdown-header">Latest <?= count($notificationSet); ?> Notifications</span>
-
+			<div class="dropdown-divider"></div>
+			
 			<?php
 
 			if (!empty($notificationSet)) {
@@ -120,9 +121,8 @@
 					} 
 					
 			?>
-					<div class="dropdown-divider"></div>
 					<a href="<?= base_url().$y->action.'/'.$y->id;?>" class="dropdown-item">
-						<i class="fas fa-envelope mr-2"></i> <?= $y->name ?>
+						<i class="fas fa-envelope mr-2"></i> <?=  mb_strimwidth($y->name, 0, 38, '...'); ?>
 						<span class="float-right text-muted text-sm"><?= $elapsed; ?></span>
 					</a>
 			<?php }
@@ -144,7 +144,7 @@
 		<a class="nav-link" data-toggle="dropdown" href="javascript:void(0)">
 			<i class="fa fa-bars"></i>
 		</a>
-		<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+		<div class="dropdown-menu  dropdown-menu-right">
 			<span class="dropdown-item dropdown-header">User Setting</span>
 			<div class="dropdown-divider"></div>
 			<a href="<?= base_url('admin/dashboard/renewable') ?>" class="dropdown-item">

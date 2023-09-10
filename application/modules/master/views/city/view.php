@@ -33,6 +33,19 @@
                                                             <td><?php echo $result->status; ?></td>
                                                         </tr>
 
+                                                        <tr>
+                                                            <th class="table_bg" scope="row">Added By</th>
+                                                            <td class="text-primary"><?php $user_data = get_users_data($result->user_id); echo $user_data->first_name.' '.$user_data->last_name; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="table_bg" scope="row">Added Date</th>
+                                                            <td><?php echo ($result->added_date); ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="table_bg" scope="row">Updated Date</th>
+                                                            <td><?php echo ($result->updated_date); ?></td>
+                                                        </tr>
+
                                                     </tbody>
                                                 </table>
                                             </div>
