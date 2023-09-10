@@ -1,6 +1,6 @@
 <?php
 
-class State_mod extends CI_Model
+class Taxslab_mod extends CI_Model
 {
 
     function __construct()

@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class State extends CI_Controller
+class Tax_slab extends CI_Controller
 {
 
-    var $UpperCaseModuleName = 'State';
-    var $LowerCaseModuleName = 'state';
-    var $DefaultRedirection = '/master/state';
-    var $DefaultRedirectionWithHypan = 'master/state';
+    var $UpperCaseModuleName = 'TaxSlab';
+    var $LowerCaseModuleName = 'taxslab';
+    var $DefaultRedirection = '/master/tax_slab';
+    var $DefaultRedirectionWithHypan = 'master/tax_slab';
 
 
 
@@ -18,7 +18,7 @@ class State extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('state_mod');
+        $this->load->model('taxslab_mod');
     }
 
     /* End of constructor */
@@ -34,10 +34,10 @@ class State extends CI_Controller
     public function index()
 
     {
-        $data['breadcum'] = array(Master_State => 'Dashboard', '' => Master_State_Name.' Listing');
-        $data['title'] = WEBSITE_NAME . ' | '.Master_State_Name;
-        $data['page_title'] = Master_State_Name.' Management';
-        $page = 'state/listing';
+        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => Master_NameTaxSlab.' Listing');
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
+        $data['page_title'] = Master_NameTaxSlab.' Management';
+        $page = 'tax_slab/listing';
         $data['page'] = $page;
         _layout($data);
     }
@@ -53,7 +53,7 @@ class State extends CI_Controller
     public function add()
     {
         if (isPostBack()) {
-            $this->form_validation->set_rules('add_name', Master_State_Name.' Name',  'trim|required|is_unique[states.name]');
+            $this->form_validation->set_rules('add_name', Master_NameTaxSlab.' Name',  'trim|required|is_unique[states.name]');
             $this->form_validation->set_rules('status', 'Status', 'required');
             if ($this->form_validation->run() == FALSE) {
             } else {
@@ -64,7 +64,7 @@ class State extends CI_Controller
                     'added_date'        => date('Y-m-d H:i:s'),
                     'user_id'           => currentuserinfo()->id,
                 );
-                $this->state_mod->add($postdata);
+                $this->taxslab_mod->add($postdata);
                 $title = '<b>' . ucfirst($_POST['add_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 
@@ -77,13 +77,13 @@ class State extends CI_Controller
                 );
                 notificationData($data,'added');
                 set_flashdata('success', $flash_message);
-                redirect('/master/state');
+                redirect('/master/tax_slab');
             }
         }
-        $data['breadcum'] = array(Master_State => 'Dashboard', '' => 'Add '.Master_State_Name);
-        $data['title'] = WEBSITE_NAME . ' | '.Master_State_Name;
-        $data['page_title'] = 'Add '.Master_State_Name;
-        $page = 'state/add';
+        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'Add '.Master_NameTaxSlab);
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
+        $data['page_title'] = 'Add '.Master_NameTaxSlab;
+        $page = 'tax_slab/add';
         $data['page'] = $page;
         _layout($data);
     }
@@ -102,20 +102,20 @@ class State extends CI_Controller
         $state_id = ID_decode($id);
         if (isPostBack()) {
             $state_id = ID_decode($id);
-            $this->form_validation->set_rules('add_name', Master_State_Name.' Name',  'trim|required');
+            $this->form_validation->set_rules('add_name', Master_NameTaxSlab.' Name',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
 
             if ($this->form_validation->run() == FALSE) {
             } else {
                 /*check name for pre existance*/
                 $city_name        =   $this->input->post('add_name');
-                $check_data         =   $this->state_mod->check_preexistance($state_id, $city_name);
+                $check_data         =   $this->taxslab_mod->check_preexistance($state_id, $city_name);
                 /*End of this*/
                 if ($check_data) {
-                    set_flashdata('error', Master_State_Name.' name already exist.');
-                    redirect("/master/state/edit/$id");
+                    set_flashdata('error', Master_NameTaxSlab.' name already exist.');
+                    redirect("/master/tax_slab/edit/$id");
                 } else {
-                    $this->state_mod->edit($state_id);
+                    $this->taxslab_mod->edit($state_id);
                     $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
                     $data =  array(
                         "action" => $action,
@@ -125,16 +125,16 @@ class State extends CI_Controller
                         "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                     );
                     notificationData($data,'Updated');
-                    set_flashdata('success', Master_State_Name.' name updated successfully');
-                    redirect('/master/state');
+                    set_flashdata('success', Master_NameTaxSlab.' name updated successfully');
+                    redirect('/master/tax_slab');
                 }
             }
         }
-        $data['result'] = $this->state_mod->view($state_id);
-        $data['breadcum'] = array(Master_State => 'Dashboard', '' => 'Update '.Master_State_Name);
-        $data['title'] = WEBSITE_NAME . ' | '.Master_State_Name;
-        $data['page_title'] = 'Update '.Master_State_Name;
-        $page = 'state/add';
+        $data['result'] = $this->taxslab_mod->view($state_id);
+        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'Update '.Master_NameTaxSlab);
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
+        $data['page_title'] = 'Update '.Master_NameTaxSlab;
+        $page = 'tax_slab/add';
         $data['page'] = $page;
         _layout($data);
     }
@@ -154,11 +154,11 @@ class State extends CI_Controller
                 $this->db->where('id', $click);
                 $this->db->update('notification', $data);
             }
-            $data['result'] = $this->state_mod->view(@$state_id);
-            $data['breadcum'] = array(Master_State => 'Dashboard', '' => 'View '.Master_State_Name);
-            $data['title'] = WEBSITE_NAME . ' | '.Master_State_Name;
-            $data['page_title'] = 'View '.Master_State_Name;
-            $page = 'state/view';
+            $data['result'] = $this->taxslab_mod->view(@$state_id);
+            $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'View '.Master_NameTaxSlab);
+            $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
+            $data['page_title'] = 'View '.Master_NameTaxSlab;
+            $page = 'tax_slab/view';
             $data['page'] = $page;
             _layout($data);
         }
@@ -169,11 +169,11 @@ class State extends CI_Controller
     {
         $requestData    = 0; //$this->input->post(null, true);
         /*Counting warehouse data*/
-        $query          =   $this->state_mod->count_data();
+        $query          =   $this->taxslab_mod->count_data();
         $totalData      =   $query->num_rows();
         $totalFiltered  =   $totalData;  //
         /*End of counting warehouse data*/
-        $citydata = $this->state_mod->get_data();
+        $citydata = $this->taxslab_mod->get_data();
         $data   =   array();
         if (!empty($citydata) && count($citydata) > 0) {
             $j = $requestData['start'];
@@ -185,7 +185,7 @@ class State extends CI_Controller
                 $nestedData[]   =   $row["name"];
                 $nestedData[]   =   $row["status"];
                 $state_id        =   $row['id'];
-                $nestedData[]   =   $this->load->view("state/_action", array("row" => $row), true);
+                $nestedData[]   =   $this->load->view("tax_slab/_action", array("row" => $row), true);
                 $data[]         =   $nestedData;
             }
         }
@@ -212,8 +212,8 @@ class State extends CI_Controller
     {
         $post = $this->input->post('id');
         if (!empty($post)) {
-            if ($this->state_mod->deletedata($post)) {
-                set_flashdata('success', Master_State_Name.' deleted successfully');
+            if ($this->taxslab_mod->deletedata($post)) {
+                set_flashdata('success', Master_NameTaxSlab.' deleted successfully');
                 //redirect('/city');
             } else {
                 set_flashdata('success', 'Some error occured');
@@ -232,8 +232,8 @@ class State extends CI_Controller
     {
         $post = $this->input->post('id');
         if (!empty($post)) {
-            if ($this->state_mod->restoreData($post)) {
-                set_flashdata('success', Master_State_Name.' Restored successfully');
+            if ($this->taxslab_mod->restoreData($post)) {
+                set_flashdata('success', Master_NameTaxSlab.' Restored successfully');
                 //redirect('/city');
             } else {
                 set_flashdata('success', 'Some error occured');

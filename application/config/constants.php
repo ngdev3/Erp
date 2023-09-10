@@ -84,16 +84,19 @@ defined('EXIT_DATABASE') or define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN') or define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX') or define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
+
 /*custom constants define*/
 define('DB_HOST', 'localhost');
 define('DB_USERNAME', 'kyi');
 define('DB_PASSWORD', 'kyi@kyi');
 define('DB_DATABASE', 'kyi'); //centralized
 
+
 /*Pay u money credentials*/
 define('MERCHANT_KEY', 'nlaV0GRj');
 define('SALT', 'qOnD5DJSze');
 define('PAYU_BASE_URL', 'https://test.payu.in');
+
 
 /*Google translate Api Credentials*/
 define('GOOGLE_API_KEY', 'AIzaSyAPBpFTngYs7TxsTR-DH0XHi3QXmEx1Gik');
@@ -103,9 +106,11 @@ define('USERNAME', '');
 define('PASSWORD', '');
 define('SENDERID', '');
 
+
 define('ADMIN_EMAIL', "tekshapers.rajat@gmail.com");
 define('ADMIN_NAME', "Admin");
 define('API_KEY', 'A4646gth5674');
+
 
 /*social media urls*/
 define('FB_URL', '');
@@ -113,12 +118,34 @@ define('TW_URL', '');
 define('LI_URL', '');
 define('GP_URL', '');
 
+
 /*Contact number*/
 define('SUPPORT_HELPLINE', '');
 define('SUPPORT_HELPLINE_USA', '');
 define('SITE_URL_ORI', '');
 
+
 /* Website Name */
 define('WEBSITE_NAME', 'C R Industries');
 define('EmailID', 'info@thecrindustries.com');
 define('From_Name', 'C R Industries');
+
+
+/**
+ * Master Breadcrumb State
+ */
+define('Master_State', 'admin/dashboard/');
+define('Master_State_Name', 'State');
+
+/**
+ * Master Breadcrumb City
+ */
+define('Master_City', 'admin/dashboard/');
+define('Master_NameCity', 'City');
+
+/**
+ * Master Breadcrumb TaxSlab
+ */
+define('Master_TaxSlab', 'admin/dashboard/');
+define('Master_NameTaxSlab', 'Tax Slab');
+
