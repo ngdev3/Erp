@@ -99,6 +99,7 @@
        "responsive": true,
        "lengthChange": false,
        "autoWidth": false,
+       "lengthMenu": [[100, "All", 50, 25], [100, "All", 50, 25]],
        "dom": 'frtipB',
        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
        "ajax": {

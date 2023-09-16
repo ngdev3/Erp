@@ -99,6 +99,7 @@
        "lengthChange": false,
        "autoWidth": false,
        "dom": 'frtipB',
+       "lengthMenu": [[100, "All", 50, 25]],
        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
        "ajax": {
          url: "<?php echo base_url(); ?>/master/state/view_all", // json datasource

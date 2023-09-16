@@ -8,14 +8,20 @@
            <div class="card-body">
              <div class="col-6"> </div>
              <div class="col-6 pull-right">
-               <a href="<?php echo base_url('master/state/add'); ?>" id="back-btn" class="btn btn-success">Add State</a>
+               <a href="<?php echo base_url('master/tax_slab/add'); ?>" id="back-btn" class="btn btn-success">Tax Slab</a>
              </div>
 
              <table id="datatable-grid" class="table table-bordered table-striped">
                <thead>
                  <tr>
                    <th>Id</th>
-                   <th>Name</th>
+                   <th>TaxSlab Name</th>
+                   <th>IGST</th>
+                   <th>CGST</th>
+                   <th>SGST</th>
+                   <th>CESS</th>
+                   <th>Calculated tax on mrp</th>
+                   <th>Zero tax type</th>
                    <th>Status</th>
                    <th>Action</th>
                  </tr>
@@ -50,10 +56,10 @@
              action: function() {
                $.ajax({
                  type: "POST",
-                 url: "<?php echo site_url("master/state/deletedata") ?>",
+                 url: "<?php echo site_url("master/tax_slab/deletedata") ?>",
                  data: csrf_name + '=' + csrf_token + '&id=' + id,
                  success: function(data) {
-                   window.location.href = "<?= base_url() ?>master/state";
+                   window.location.href = "<?= base_url() ?>master/tax_slab";
                  }
                });
              }
@@ -78,11 +84,11 @@
              action: function() {
                $.ajax({
                  type: "POST",
-                 url: "<?php echo site_url("master/state/restoreData") ?>",
+                 url: "<?php echo site_url("master/tax_slab/restoreData") ?>",
                  data: csrf_name + '=' + csrf_token + '&id=' + id,
                  success: function(data) {
 
-                   window.location.href = "<?= base_url() ?>master/state";
+                   window.location.href = "<?= base_url() ?>master/tax_slab";
                  }
                });
              }
@@ -101,7 +107,7 @@
        "dom": 'frtipB',
        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
        "ajax": {
-         url: "<?php echo base_url(); ?>/master/state/view_all", // json datasource
+         url: "<?php echo base_url(); ?>/master/tax_slab/view_all", // json datasource
          type: "post",
          error: function(data) {
            $("#employee-grid_processing").css("display", "none");

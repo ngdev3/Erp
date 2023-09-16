@@ -52,26 +52,38 @@ class Tax_slab extends CI_Controller
      */
     public function add()
     {
+        // pr($_POST);die;
         if (isPostBack()) {
-            $this->form_validation->set_rules('add_name', Master_NameTaxSlab.' Name',  'trim|required|is_unique[states.name]');
+            $this->form_validation->set_rules('tax_slab_name', Master_NameTaxSlab.' Name',  'trim|required');
+            $this->form_validation->set_rules('igst', ' IGST',  'trim|required');
+            $this->form_validation->set_rules('cgst', ' CGST',  'trim|required');
+            $this->form_validation->set_rules('sgst', ' SGST',  'trim|required');
+            $this->form_validation->set_rules('cess', ' CESS',  'trim|required');
+            $this->form_validation->set_rules('calculated_tax_on_mrp', ' Calculated Tax On MRP',  'trim|required');
+            $this->form_validation->set_rules('zero_tax_type', ' Zero Tax Type',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
             if ($this->form_validation->run() == FALSE) {
             } else {
                 $postdata = array(
-                    'name'              => $_POST['add_name'],
-                    'status'            => $_POST['status'],
-                    'country_id'        => 101,
-                    'added_date'        => date('Y-m-d H:i:s'),
-                    'user_id'           => currentuserinfo()->id,
+                    'tax_slab_name'             => $_POST['tax_slab_name'],
+                    'igst'                      => $_POST['igst'],
+                    'cgst'                      => $_POST['cgst'],
+                    'sgst'                      => $_POST['sgst'],
+                    'cess'                      => $_POST['cess'],
+                    'calculated_tax_on_mrp'     => $_POST['calculated_tax_on_mrp'],
+                    'zero_tax_type'             => $_POST['zero_tax_type'],
+                    'status'                    => $_POST['status'],
+                    'added_date'                => date('Y-m-d H:i:s'),
+                    'user_id'                   => currentuserinfo()->id,
                 );
                 $this->taxslab_mod->add($postdata);
-                $title = '<b>' . ucfirst($_POST['add_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
+                $title = '<b>' . ucfirst($_POST['tax_slab_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
                 $action = $this->DefaultRedirectionWithHypan . '/view/' . ID_encode($this->db->insert_id());
                 
                 $data =  array(
                     "action" => $action,
                     "type" => "New",
-                    "module_title"=>$_POST['add_name'],
+                    "module_title"=>$_POST['tax_slab_name'],
                     "module_name"=>$this->UpperCaseModuleName,
                     "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
@@ -98,17 +110,22 @@ class Tax_slab extends CI_Controller
      */
     public function edit($id = "")
     {
-        // pr($_POST);die;
         $state_id = ID_decode($id);
+       // pr($_POST);die;
         if (isPostBack()) {
-            $state_id = ID_decode($id);
-            $this->form_validation->set_rules('add_name', Master_NameTaxSlab.' Name',  'trim|required');
+            $this->form_validation->set_rules('tax_slab_name', Master_NameTaxSlab.' Name',  'trim|required');
+            $this->form_validation->set_rules('igst', ' IGST',  'trim|required');
+            $this->form_validation->set_rules('cgst', ' CGST',  'trim|required');
+            $this->form_validation->set_rules('sgst', ' SGST',  'trim|required');
+            $this->form_validation->set_rules('cess', ' CESS',  'trim|required');
+            $this->form_validation->set_rules('calculated_tax_on_mrp', ' Calculated Tax On MRP',  'trim|required');
+            $this->form_validation->set_rules('zero_tax_type', ' Zero Tax Type',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
 
             if ($this->form_validation->run() == FALSE) {
             } else {
                 /*check name for pre existance*/
-                $city_name        =   $this->input->post('add_name');
+                $city_name        =   $this->input->post('tax_slab_name');
                 $check_data         =   $this->taxslab_mod->check_preexistance($state_id, $city_name);
                 /*End of this*/
                 if ($check_data) {
@@ -117,10 +134,22 @@ class Tax_slab extends CI_Controller
                 } else {
                     $this->taxslab_mod->edit($state_id);
                     $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
+                    $postdata = array(
+                        'tax_slab_name'             => $_POST['tax_slab_name'],
+                        'igst'                      => $_POST['igst'],
+                        'cgst'                      => $_POST['cgst'],
+                        'sgst'                      => $_POST['sgst'],
+                        'cess'                      => $_POST['cess'],
+                        'calculated_tax_on_mrp'     => $_POST['calculated_tax_on_mrp'],
+                        'zero_tax_type'             => $_POST['zero_tax_type'],
+                        'status'                    => $_POST['status'],
+                        'added_date'                => date('Y-m-d H:i:s'),
+                        'user_id'                   => currentuserinfo()->id,
+                    );
                     $data =  array(
                         "action" => $action,
                         "type" => "",
-                        "module_title"=>$_POST['add_name'],
+                        "module_title"=>$_POST['tax_slab_name'],
                         "module_name"=>$this->UpperCaseModuleName,
                         "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                     );
@@ -155,7 +184,7 @@ class Tax_slab extends CI_Controller
                 $this->db->update('notification', $data);
             }
             $data['result'] = $this->taxslab_mod->view(@$state_id);
-            $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'View '.Master_NameTaxSlab);
+            $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard','master/tax_slab' => 'Tax Slab Listing', '' => 'View '.Master_NameTaxSlab);
             $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
             $data['page_title'] = 'View '.Master_NameTaxSlab;
             $page = 'tax_slab/view';
@@ -182,7 +211,13 @@ class Tax_slab extends CI_Controller
                 $row    =   (array)$citydata[$i];
                 $nestedData     =   array();
                 $nestedData[]   =   $j;
-                $nestedData[]   =   $row["name"];
+                $nestedData[]   =   $row["tax_slab_name"];
+                $nestedData[]   =   $row["igst"];
+                $nestedData[]   =   $row["cgst"];
+                $nestedData[]   =   $row["sgst"];
+                $nestedData[]   =   $row["cess"];
+                $nestedData[]   =   $row["calculated_tax_on_mrp"];
+                $nestedData[]   =   $row["zero_tax_type"];
                 $nestedData[]   =   $row["status"];
                 $state_id        =   $row['id'];
                 $nestedData[]   =   $this->load->view("tax_slab/_action", array("row" => $row), true);
@@ -213,6 +248,15 @@ class Tax_slab extends CI_Controller
         $post = $this->input->post('id');
         if (!empty($post)) {
             if ($this->taxslab_mod->deletedata($post)) {
+               
+                $data =  array(
+                    "action" => 'master/tax_slab',
+                    "type" => "",
+                    "module_title"=>$_POST['tax_slab_name'],
+                    "module_name"=>$this->UpperCaseModuleName,
+                    "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
+                );
+                notificationData($data,'Updated');
                 set_flashdata('success', Master_NameTaxSlab.' deleted successfully');
                 //redirect('/city');
             } else {
