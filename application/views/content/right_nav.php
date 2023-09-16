@@ -122,7 +122,7 @@
 					
 			?>
 					<a href="<?= base_url().$y->action.'/'.$y->id;?>" class="dropdown-item">
-						<i class="fas fa-envelope mr-2"></i> <?=  mb_strimwidth($y->name, 0, 38, '...'); ?>
+						<i class="fas fa-envelope mr-2"></i> <?=  mb_strimwidth($y->name, 0, 380, '...'); ?>
 						<span class="float-right text-muted text-sm"><?= $elapsed; ?></span>
 					</a>
 			<?php }

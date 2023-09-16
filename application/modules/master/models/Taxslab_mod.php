@@ -11,7 +11,7 @@ class Taxslab_mod extends CI_Model
     //THIS FUNCTION ADD
     public function add($data)
     {
-        if ($this->db->insert("states", $data)) {
+        if ($this->db->insert("gstslab", $data)) {
             return true;
         }
     }
@@ -19,15 +19,14 @@ class Taxslab_mod extends CI_Model
     function count_data()
     {
         $this->db->select('*');
-        return $query = $this->db->get('states');
+        return $query = $this->db->get('gstslab');
     }
 
     function get_data()
     {
 
         $this->db->select('*');
-        $this->db->from('states');
-        $this->db->where('status!=', "Delete");
+        $this->db->from('gstslab');
         $query = $this->db->get();
         if ($query->num_rows()) {
             return $query->result();
@@ -41,7 +40,7 @@ class Taxslab_mod extends CI_Model
     {
         $data['status'] = 'Delete';
         $this->db->where('id', $id);
-        $this->db->update('states', $data);
+        $this->db->update('gstslab', $data);
         return true;
     }
 
@@ -49,7 +48,7 @@ class Taxslab_mod extends CI_Model
     {
         $data['status'] = 'Active';
         $this->db->where('id', $id);
-        $this->db->update('states', $data);
+        $this->db->update('gstslab', $data);
         return true;
     }
 
@@ -65,8 +64,8 @@ class Taxslab_mod extends CI_Model
     {
         $this->db->select('*');
         $this->db->where('id !=', $id);
-        $this->db->where('name ', $city_name);
-        $query = $this->db->get('states');
+        $this->db->where('tax_slab_name ', $city_name);
+        $query = $this->db->get('gstslab');
         //  echo $this->db->last_query();
         return $query->num_rows();
         //die();
@@ -75,19 +74,27 @@ class Taxslab_mod extends CI_Model
     //  THIS FUNCTION EDIT city DATA
     function edit($id)
     {
-        $data['id'] = $id;
-        $data['name'] = $this->input->post('add_name');
-        $data['status'] = $this->input->post('status');
-        $data['updated_date'] = date('Y-m-d H:i:s');
+        $postdata = array(
+            'id'             => $id,
+            'tax_slab_name'             => $_POST['tax_slab_name'],
+            'igst'                      => $_POST['igst'],
+            'cgst'                      => $_POST['cgst'],
+            'sgst'                      => $_POST['sgst'],
+            'cess'                      => $_POST['cess'],
+            'calculated_tax_on_mrp'     => $_POST['calculated_tax_on_mrp'],
+            'zero_tax_type'             => $_POST['zero_tax_type'],
+            'status'                    => $_POST['status'],
+            'updated_date'                => date('Y-m-d H:i:s'),
+        );
         $this->db->where('id', $id);
-        $this->db->update('states', $data);
+        $this->db->update('gstslab', $postdata);
     }
 
     //  THIS FUNCTION VIEW city DATA
     function view($id) {
         $this->db->select('*');
         $this->db->where('id', $id);
-        return $query = $this->db->get("states")->row();
+        return $query = $this->db->get("gstslab")->row();
     }
 
     
