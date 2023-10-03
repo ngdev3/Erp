@@ -39,6 +39,32 @@ if (!function_exists('getGST')) {
 }
 
 
+
+/**
+ * Get The GST Tax Slab
+ *
+ * This function Get The GST Tax Slab
+ *
+ * @param	
+ * @return
+ */
+if (!function_exists('getUnitType')) {
+
+    function getUnitType()
+    {
+        $CI = &get_instance();
+        $CI->db->select('*');
+        $CI->db->from('unit_type');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+}
+
+
 /**
  * is_adminprotected
  *

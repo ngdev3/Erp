@@ -57,14 +57,20 @@
                                                 </label>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="inputEmail4">Unit*</label>
-                                                <?php
-                                                $name = @$result->unit_name;
-                                                $postvalue = @$_POST['unit_name'];
-                                                echo form_input(array('name' => 'unit_name', 'maxlength' => '25', 'class' => 'form-control',  'placeholder' => 'Unit', 'value' => !empty($postvalue) ? $postvalue : $name, 'onkeyup' => 'validate_character(this)'));
-                                                ?>
+                                            <label for="inputEmail4">Unit Name*</label>
+                                                <select class="form-control" name="unit_id">
+                                                    <option value="">Select Unit Type</option>
+                                                    <?php if (!empty($getUnitType)) {
+                                                        foreach ($getUnitType as $key => $val) {
+                                                            ?>
+                                                            <option value="<?= $val->id ?>"
+                                                            <?php if (@$val->id ==  @$result->unit_id) {echo 'selected="selected"';} ?>><?= $val->unit_name ?></option>
+                                                                            
+                                                    <?php }
+                                                    }; ?>
+                                                </select>
                                                 <label class="error">
-                                                    <div class="help-block" style="color:red"> <?php echo form_error('unit_name'); ?></div>
+                                                    <div class="help-block" style="color:red"> <?php echo form_error('unit_id'); ?></div>
                                                 </label>
                                             </div>
 

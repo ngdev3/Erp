@@ -18,7 +18,7 @@
                                                 <table class="table">
                                                     <tbody>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">item Name</th>
+                                                            <th class="table_bg" scope="col">Item Name</th>
                                                             <td><?php echo $result->item_name; ?></td>
                                                         </tr>
                                                         <tr>
@@ -27,11 +27,11 @@
                                                         </tr>
                                                         <tr>
                                                             <th class="table_bg" scope="col">Tax Slab</th>
-                                                            <td><a href="<?php echo base_url('/master/gstslab/'.ID_encode($result->gst_slab_id));?>"><?php echo $result->tax_slab_name; ?></a></td>
+                                                            <td><a href="<?php echo base_url('/master/tax_slab/view/'.ID_encode($result->gst_slab_id));?>"><?php echo $result->tax_slab_name; ?></a></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">Unit Name</th>
-                                                            <td><?php echo $result->unit_name; ?></td>
+                                                            <th class="table_bg" scope="col">Item Name</th>
+                                                            <td><?php echo $result->item_name	; ?></td>
                                                         </tr>
                                                         <tr>
                                                             <th class="table_bg" scope="col">Bharti</th>

@@ -145,7 +145,9 @@
 					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'item') {
 											echo 'menu-open active';
 										} ?>">
-						<a href="<?= base_url('master/item') ?>" class="nav-link">
+						<a href="<?= base_url('master/item') ?>" class="nav-link <?php if ($uri1 == 'master' && $uri2 == 'item') {
+											echo 'active';
+										} ?>">
 							<i class="far fa-circle nav-icon"></i>
 							<p>Item Master</p>
 							<i class="fas fa-angle-left right"></i>

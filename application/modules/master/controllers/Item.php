@@ -4,6 +4,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Item extends CI_Controller
 {
 
+    var $UpperCaseModuleName = 'Item';
+    var $LowerCaseModuleName = 'item';
+    var $DefaultRedirection = '/master/item';
+    var $DefaultRedirectionWithHypan = 'master/item';
+
+
 
     /**
      * Constructor
@@ -27,10 +33,10 @@ class Item extends CI_Controller
     public function index()
 
     {
-        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Item Listing');
+        $data['breadcum'] = array("admin/dashboard/" => 'Dashboard', '' => 'Item Listing');
         $data['title'] = WEBSITE_NAME . ' | Item';
         $data['page_title'] = 'Item Management';
-        $page = 'Item/listing';
+        $page = 'item/listing';
         $data['page'] = $page;
         _layout($data);
     }
@@ -46,11 +52,11 @@ class Item extends CI_Controller
     public function add()
     {
         if (isPostBack()) {
-
+         // pr($_POST);die;
             $this->form_validation->set_rules('item_name', 'Item Name',  'trim|required|is_unique[item.item_name]');
             $this->form_validation->set_rules('hsn_code', 'HSN Code',  'trim|required');
             $this->form_validation->set_rules('gst_slab_id', 'GST Slab',  'trim|required');
-            $this->form_validation->set_rules('unit_name', 'Unit Name',  'trim|required');
+            $this->form_validation->set_rules('unit_id', 'Unit Name',  'trim|required');
             $this->form_validation->set_rules('bharti', 'Bharti',  'trim|required');
             $this->form_validation->set_rules('short_name', 'Short Name',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
@@ -60,31 +66,36 @@ class Item extends CI_Controller
                     'item_name'              => $_POST['item_name'],
                     'hsn_code'               => $_POST['hsn_code'],
                     'gst_slab_id'           => $_POST['gst_slab_id'],
-                    'unit_name'        => $_POST['unit_name'],
-                    'bharti'        => $_POST['bharti'],
-                    'short_name'        => $_POST['short_name'],
-                    'status'        => $_POST['status'],
-                    'added_date'        => date('Y-m-d H:i:s'),
-                    'user_id'           => currentuserinfo()->id,
+                    'unit_id'               => $_POST['unit_id'],
+                    'bharti'                => $_POST['bharti'],
+                    'short_name'            => $_POST['short_name'],
+                    'status'                => $_POST['status'],
+                    'added_date'            => date('Y-m-d H:i:s'),
+                    'user_id'               => currentuserinfo()->id,
                 );
+              //  pr($_POST);die;
                 $this->item_mod->add($postdata);
-                $flash_message = 'New Item added';
-                $title = '<b>' . ucfirst($_POST['item_name']) . '</b> Item added';
                 $action = 'master/item/view/' . ID_encode($this->db->insert_id());
+
+
                 $data =  array(
-                    "title" => $title,
                     "action" => $action,
-                    "flash_message" => $flash_message
+                    "type" => "New",
+                    "module_title"=>$_POST['item_name'],
+                    "module_name"=>$this->UpperCaseModuleName,
+                    "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
-                notificationData($data);
+                notificationData($data,'added');
                 set_flashdata('success', $flash_message);
+
                 redirect('/master/item');
             }
         }
-        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Add Item');
+        $data['breadcum'] = array("admin/dashboard/" => 'Dashboard', '' => 'Add Item');
         $data['title'] = WEBSITE_NAME . ' | Item';
         $data['page_title'] = 'Add Item';
         $data['gstslabs'] = getGST();
+        $data['getUnitType'] = getUnitType();
         $page = 'Item/add';
         // pr($data); die;
         $data['page'] = $page;
@@ -108,7 +119,7 @@ class Item extends CI_Controller
             $this->form_validation->set_rules('item_name', 'Item Name',  'trim|required');
             $this->form_validation->set_rules('hsn_code', 'HSN Code',  'trim|required');
             $this->form_validation->set_rules('gst_slab_id', 'GST Slab',  'trim|required');
-            $this->form_validation->set_rules('unit_name', 'Unit Name',  'trim|required');
+            $this->form_validation->set_rules('unit_id', 'Unit Name',  'trim|required');
             $this->form_validation->set_rules('bharti', 'Bharti',  'trim|required');
             $this->form_validation->set_rules('short_name', 'Short Name',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
@@ -122,6 +133,18 @@ class Item extends CI_Controller
                     set_flashdata('error', 'Item name already exist.');
                     redirect("/master/Item/edit/$id");
                 } else {
+                    $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
+                   
+                    $data =  array(
+                        "action" => $action,
+                        "type" => "",
+                        "module_title"=>$_POST['item_name'],
+                        "module_name"=>$this->UpperCaseModuleName,
+                        "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
+                    );
+                    notificationData($data,'Updated');
+                    set_flashdata('success', Master_NameTaxSlab.' name updated successfully');
+
                     $this->item_mod->edit($Item_id);
                     set_flashdata('success', 'Item name updated successfully');
                     redirect('/master/Item');
@@ -129,10 +152,11 @@ class Item extends CI_Controller
             }
         }
         $data['result'] = $this->item_mod->view($Item_id);
-        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'Update Item');
+        $data['breadcum'] = array("admin/dashboard/" => 'Dashboard', '' => 'Update Item');
         $data['title'] = WEBSITE_NAME . ' | Item';
         $data['page_title'] = 'Update Item';
         $data['gstslabs'] = getGST();
+        $data['getUnitType'] = getUnitType();
         $page = 'Item/add';
         $data['page'] = $page;
         _layout($data);
@@ -182,7 +206,7 @@ class Item extends CI_Controller
                 $nestedData     =   array();
                 $nestedData[]   =   $j;
                 $nestedData[]   =   $row["item_name"];
-                $nestedData[]   =   '<a href="gstslab/'.ID_encode($row["tax_slab_id"]).'">'.$row["tax_slab_name"].'</a>';
+                $nestedData[]   =   '<a href="'.base_url('/master/tax_slab/view/').ID_encode($row["tax_slab_id"]).'">'.$row["tax_slab_name"].'</a>';
                 $nestedData[]   =   $row["hsn_code"];
                 $nestedData[]   =   $row["unit_name"];
                 $nestedData[]   =   $row["bharti"];

@@ -25,8 +25,9 @@ class Item_mod extends CI_Model
     function get_data()
     {
 
-        $this->db->select('item.*, gsts.tax_slab_name, gsts.id as tax_slab_id');
+        $this->db->select('item.*, gsts.tax_slab_name, gsts.id as tax_slab_id, utype.unit_name as unit_name');
         $this->db->join("gstslab as gsts", 'item.gst_slab_id = gsts.id', 'left');
+        $this->db->join("unit_type as utype", 'item.unit_id = utype.id', 'left');
         $this->db->from('item');
         $query = $this->db->get();
         if ($query->num_rows()) {
@@ -79,12 +80,12 @@ class Item_mod extends CI_Model
             'item_name'              => $_POST['item_name'],
             'hsn_code'               => $_POST['hsn_code'],
             'gst_slab_id'           => $_POST['gst_slab_id'],
-            'unit_name'        => $_POST['unit_name'],
-            'bharti'        => $_POST['bharti'],
-            'short_name'        => $_POST['short_name'],
-            'status'        => $_POST['status'],
-            'updated_date'        => date('Y-m-d H:i:s'),
-            'user_id'           => currentuserinfo()->id,
+            'unit_id'               => $_POST['unit_id'],
+            'bharti'                => $_POST['bharti'],
+            'short_name'            => $_POST['short_name'],
+            'status'                => $_POST['status'],
+            'updated_date'            => date('Y-m-d H:i:s'),
+            'user_id'               => currentuserinfo()->id,
         );
         $this->db->where('id', $id);
         $this->db->update('item', $postdata);

@@ -36,9 +36,9 @@ class Dashboard extends CI_Controller {
     
 	{
       
-        $data['breadcum'] = array("dashboard/" => 'Dashboard', '' => 'State Listing');
-        $data['title'] = WEBSITE_NAME . ' | State';
-        $data['page_title'] = 'State';
+        $data['breadcum'] = array("admin/dashboard/" => 'Dashboard');
+        $data['title'] = WEBSITE_NAME . ' | Dashboard';
+        $data['page_title'] = 'Dashboard';
         $page = 'dashboard';
         $data['page'] = $page;
         _layout($data);
