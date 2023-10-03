@@ -25,13 +25,18 @@ date_default_timezone_set('Asia/Kolkata');
 | a PHP script and you can easily do that on your own.
 |
  */
-
  
-if ($_SERVER['SERVER_NAME'] == 'erp.thecrindustries.com' || $_SERVER['SERVER_NAME'] == 'www.erp.thecrindustries.com') {
+
+if ($_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME'] == 'www.thecrindustries.online') {
 
     $config['base_url'] = 'https://' . $_SERVER['HTTP_HOST'];
-} else {
 
+} else if(phpversion() == '5.6.31') {
+
+    $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/RiceMill/ERP/ERP_Admin/';
+}else  if(phpversion() == '5.6.23'){
+    $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/Erp';
+}else{
     $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/Erp';
 }
 $config['sendmailCI'] = false;
