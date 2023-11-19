@@ -8,16 +8,14 @@
            <div class="card-body">
              <div class="col-6"> </div>
              <div class="col-6 pull-right">
-               <a href="<?php echo base_url('master/center/add'); ?>" id="back-btn" class="btn btn-success">Add Center</a>
+               <a href="<?php echo base_url('master/party_type/add'); ?>" id="back-btn" class="btn btn-success">Add Party Type</a>
              </div>
 
              <table id="datatable-grid" class="table table-bordered table-striped">
                <thead>
                  <tr>
                    <th>Id</th>
-                   <th>Center Name</th>
-                   <th>Target</th>
-                   <th>Financial Year</th>
+                   <th>Name</th>
                    <th>Status</th>
                    <th>Action</th>
                  </tr>
@@ -52,10 +50,10 @@
              action: function() {
                $.ajax({
                  type: "POST",
-                 url: "<?php echo site_url("master/center/deletedata") ?>",
+                 url: "<?php echo site_url("master/party_type/deletedata") ?>",
                  data: csrf_name + '=' + csrf_token + '&id=' + id,
                  success: function(data) {
-                   window.location.href = "<?= base_url() ?>master/center";
+                   window.location.href = "<?= base_url() ?>master/party_type";
                  }
                });
              }
@@ -80,11 +78,11 @@
              action: function() {
                $.ajax({
                  type: "POST",
-                 url: "<?php echo site_url("master/center/restoreData") ?>",
+                 url: "<?php echo site_url("master/party_type/restoreData") ?>",
                  data: csrf_name + '=' + csrf_token + '&id=' + id,
                  success: function(data) {
 
-                   window.location.href = "<?= base_url() ?>master/center";
+                   window.location.href = "<?= base_url() ?>master/party_type";
                  }
                });
              }
@@ -103,7 +101,7 @@
        "dom": 'frtipB',
        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
        "ajax": {
-         url: "<?php echo base_url(); ?>/master/center/view_all", // json datasource
+         url: "<?php echo base_url(); ?>/master/party_type/view_all", // json datasource
          type: "post",
          error: function(data) {
            $("#employee-grid_processing").css("display", "none");

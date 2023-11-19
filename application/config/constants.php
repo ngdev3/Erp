@@ -148,4 +148,9 @@ define('Master_NameCity', 'City');
  */
 define('Master_TaxSlab', 'admin/dashboard/');
 define('Master_NameTaxSlab', 'Tax Slab');
+/**
+ * Master Breadcrumb Center
+ */
+define('Master_CenterLink', 'admin/dashboard/');
+define('Master_NameCenter', 'Center');
 

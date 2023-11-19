@@ -305,7 +305,95 @@
 									echo 'active';
 								} ?>">
 							<i class="far fa-circle nav-icon"></i>
-							<p>Add</p>
+							<p>
+								Login & Register v1
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="pages/examples/login.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Login v1</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="pages/examples/register.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Register v1</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="nav-item <?php if ($uri1 == 'master' && $uri2 == 'party_type') {
+											echo 'menu-open active';
+										} ?>">
+						<a href="<?= base_url('master/item') ?>" class="nav-link <?php if ($uri1 == 'master' && $uri2 == 'party_type') {
+											echo 'active';
+										} ?>">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Party Type Master</p>
+							<i class="fas fa-angle-left right"></i>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item ">
+								<a href="<?= base_url('master/party_type/add') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'party_type' && $uri3 == 'add') {
+									echo 'active';
+								} ?>">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Forgot Password v1</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="pages/examples/recover-password.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Recover Password v1</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="nav-item">
+						<a href="<?= base_url('master/center') ?>" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>
+								Login & Register v2
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="pages/examples/login-v2.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Login v2</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="pages/examples/register-v2.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Register v2</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="pages/examples/forgot-password-v2.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Forgot Password v2</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="pages/examples/recover-password-v2.html" class="nav-link">
+									<i class="far fa-circle nav-icon"></i>
+									<p>Recover Password v2</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a href="pages/examples/lockscreen.html" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>
+							<p>Lockscreen</p>
 						</a>
 					</li>
 					<li class="nav-item">

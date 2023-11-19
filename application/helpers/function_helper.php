@@ -28,7 +28,57 @@ if (!function_exists('getGST')) {
     {
         $CI = &get_instance();
         $CI->db->select('*');
+        $CI->db->where('status','Active');
         $CI->db->from('gstslab');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * Get The FY
+ *
+ * This function Get THE FY
+ *
+ * @param	
+ * @return
+ */
+if (!function_exists('getFY')) {
+
+    function getFY()
+    {
+        $CI = &get_instance();
+        $CI->db->select('*');
+        $CI->db->where('status','Active');
+        $CI->db->from('financial_year');
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+}
+/**
+ * Get The Crop Type
+ *
+ * This function Get  The Crop Type
+ *
+ * @param	
+ * @return
+ */
+if (!function_exists('getCrop')) {
+
+    function getCrop()
+    {
+        $CI = &get_instance();
+        $CI->db->select('*');
+        $CI->db->where('status','Active');
+        $CI->db->from('crop');
         $query = $CI->db->get();
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -54,6 +104,7 @@ if (!function_exists('getUnitType')) {
     {
         $CI = &get_instance();
         $CI->db->select('*');
+        $CI->db->where('status','Active');
         $CI->db->from('unit_type');
         $query = $CI->db->get();
         if ($query->num_rows() > 0) {

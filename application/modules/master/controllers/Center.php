@@ -34,9 +34,9 @@ class Center extends CI_Controller
     public function index()
 
     {
-        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => Master_NameTaxSlab.' Listing');
-        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
-        $data['page_title'] = Master_NameTaxSlab.' Management';
+        $data['breadcum'] = array(Master_CenterLink  => 'Dashboard', '' => Master_NameCenter.' Listing');
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameCenter;
+        $data['page_title'] = Master_NameCenter.' Management';
         $page = 'center/listing';
         $data['page'] = $page;
         _layout($data);
@@ -54,27 +54,27 @@ class Center extends CI_Controller
     {
         // pr($_POST);die;
         if (isPostBack()) {
-            $this->form_validation->set_rules('center_name', Master_NameTaxSlab.' Name',  'trim|required');
-            $this->form_validation->set_rules('igst', ' IGST',  'trim|required');
-            $this->form_validation->set_rules('cgst', ' CGST',  'trim|required');
-            $this->form_validation->set_rules('sgst', ' SGST',  'trim|required');
-            $this->form_validation->set_rules('cess', ' CESS',  'trim|required');
-            $this->form_validation->set_rules('calculated_tax_on_mrp', ' Calculated Tax On MRP',  'trim|required');
-            $this->form_validation->set_rules('zero_tax_type', ' Zero Tax Type',  'trim|required');
+            $this->form_validation->set_rules('center_name', Master_NameCenter.' Name',  'trim|required');
+            $this->form_validation->set_rules('incharge_name', ' Incharge Name',  'trim|required');
+            $this->form_validation->set_rules('incharge_mobile_no', ' Incharge Mobile Number',  'trim|required|regex_match[/^[0-9]{10}$/]');
+            $this->form_validation->set_rules('incharge_location', 'Incharge Center Location',  'trim|required');
+            $this->form_validation->set_rules('target', 'Center Target',  'trim|required');
+            $this->form_validation->set_rules('financial_year_id', ' Financial Year',  'trim|required');
+            $this->form_validation->set_rules('crop_type_id', ' Crop Type',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
             if ($this->form_validation->run() == FALSE) {
             } else {
                 $postdata = array(
-                    'center_name'             => $_POST['center_name'],
-                    'igst'                      => $_POST['igst'],
-                    'cgst'                      => $_POST['cgst'],
-                    'sgst'                      => $_POST['sgst'],
-                    'cess'                      => $_POST['cess'],
-                    'calculated_tax_on_mrp'     => $_POST['calculated_tax_on_mrp'],
-                    'zero_tax_type'             => $_POST['zero_tax_type'],
-                    'status'                    => $_POST['status'],
-                    'added_date'                => date('Y-m-d H:i:s'),
-                    'user_id'                   => currentuserinfo()->id,
+                    'center_name'                       => $_POST['center_name'],
+                    'incharge_name'                     => $_POST['incharge_name'],
+                    'incharge_mobile_no'                => $_POST['incharge_mobile_no'],
+                    'incharge_location'                 => $_POST['incharge_location'],
+                    'target'                            => $_POST['target'],
+                    'financial_year_id'                 => $_POST['financial_year_id'],
+                    'crop_type_id'                      => $_POST['crop_type_id'],
+                    'status'                            => $_POST['status'],
+                    'added_date'                        => date('Y-m-d H:i:s'),
+                    'user_id'                           => currentuserinfo()->id,
                 );
                 $this->center_mod->add($postdata);
                 $title = '<b>' . ucfirst($_POST['center_name']) . '</b> ' . $this->UpperCaseModuleName . ' added';
@@ -92,9 +92,11 @@ class Center extends CI_Controller
                 redirect('/master/center');
             }
         }
-        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'Add '.Master_NameTaxSlab);
-        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
-        $data['page_title'] = 'Add '.Master_NameTaxSlab;
+        $data['breadcum'] = array(Master_CenterLink  => 'Dashboard', '' => 'Add '.Master_NameCenter);
+        $data['gstFY'] = getFY();
+        $data['getCrop'] = getCrop();
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameCenter;
+        $data['page_title'] = 'Add '.Master_NameCenter;
         $page = 'center/add';
         $data['page'] = $page;
         _layout($data);
@@ -113,15 +115,14 @@ class Center extends CI_Controller
         $state_id = ID_decode($id);
        // pr($_POST);die;
         if (isPostBack()) {
-            $this->form_validation->set_rules('center_name', Master_NameTaxSlab.' Name',  'trim|required');
-            $this->form_validation->set_rules('igst', ' IGST',  'trim|required');
-            $this->form_validation->set_rules('cgst', ' CGST',  'trim|required');
-            $this->form_validation->set_rules('sgst', ' SGST',  'trim|required');
-            $this->form_validation->set_rules('cess', ' CESS',  'trim|required');
-            $this->form_validation->set_rules('calculated_tax_on_mrp', ' Calculated Tax On MRP',  'trim|required');
-            $this->form_validation->set_rules('zero_tax_type', ' Zero Tax Type',  'trim|required');
+            $this->form_validation->set_rules('center_name', Master_NameCenter.' Name',  'trim|required');
+            $this->form_validation->set_rules('incharge_name', ' Incharge Name',  'trim|required');
+            $this->form_validation->set_rules('incharge_mobile_no', ' Incharge Mobile Number',  'trim|required|regex_match[/^[0-9]{10}$/]');
+            $this->form_validation->set_rules('incharge_location', 'Incharge Center Location',  'trim|required');
+            $this->form_validation->set_rules('target', 'Center Target',  'trim|required');
+            $this->form_validation->set_rules('financial_year_id', ' Financial Year',  'trim|required');
+            $this->form_validation->set_rules('crop_type_id', ' Crop Type',  'trim|required');
             $this->form_validation->set_rules('status', 'Status', 'required');
-
             if ($this->form_validation->run() == FALSE) {
             } else {
                 /*check name for pre existance*/
@@ -129,20 +130,20 @@ class Center extends CI_Controller
                 $check_data         =   $this->center_mod->check_preexistance($state_id, $city_name);
                 /*End of this*/
                 if ($check_data) {
-                    set_flashdata('error', Master_NameTaxSlab.' name already exist.');
+                    set_flashdata('error', Master_NameCenter.' name already exist.');
                     redirect("/master/center/edit/$id");
                 } else {
                     $this->center_mod->edit($state_id);
                     $action = $this->DefaultRedirectionWithHypan . '/view/' . $id;
                     $postdata = array(
-                        'center_name'             => $_POST['center_name'],
-                        'igst'                      => $_POST['igst'],
-                        'cgst'                      => $_POST['cgst'],
-                        'sgst'                      => $_POST['sgst'],
-                        'cess'                      => $_POST['cess'],
-                        'calculated_tax_on_mrp'     => $_POST['calculated_tax_on_mrp'],
-                        'zero_tax_type'             => $_POST['zero_tax_type'],
-                        'status'                    => $_POST['status'],
+                        'center_name'                       => $_POST['center_name'],
+                        'incharge_name'                     => $_POST['incharge_name'],
+                        'incharge_mobile_no'                => $_POST['incharge_mobile_no'],
+                        'incharge_location'                 => $_POST['incharge_location'],
+                        'target'                            => $_POST['target'],
+                        'financial_year_id'                 => $_POST['financial_year_id'],
+                        'crop_type_id'                      => $_POST['crop_type_id'],
+                        'status'                            => $_POST['status'],
                         'added_date'                => date('Y-m-d H:i:s'),
                         'user_id'                   => currentuserinfo()->id,
                     );
@@ -154,15 +155,17 @@ class Center extends CI_Controller
                         "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                     );
                     notificationData($data,'Updated');
-                    set_flashdata('success', Master_NameTaxSlab.' name updated successfully');
+                    set_flashdata('success', Master_NameCenter.' name updated successfully');
                     redirect('/master/center');
                 }
             }
         }
         $data['result'] = $this->center_mod->view($state_id);
-        $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard', '' => 'Update '.Master_NameTaxSlab);
-        $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
-        $data['page_title'] = 'Update '.Master_NameTaxSlab;
+        $data['breadcum'] = array(Master_CenterLink  => 'Dashboard', '' => 'Update '.Master_NameCenter);
+        $data['title'] = WEBSITE_NAME . ' | '.Master_NameCenter;
+        $data['page_title'] = 'Update '.Master_NameCenter;
+        $data['gstFY'] = getFY();
+        $data['getCrop'] = getCrop();
         $page = 'center/add';
         $data['page'] = $page;
         _layout($data);
@@ -184,9 +187,9 @@ class Center extends CI_Controller
                 $this->db->update('notification', $data);
             }
             $data['result'] = $this->center_mod->view(@$state_id);
-            $data['breadcum'] = array(Master_TaxSlab  => 'Dashboard','master/center' => 'Tax Slab Listing', '' => 'View '.Master_NameTaxSlab);
-            $data['title'] = WEBSITE_NAME . ' | '.Master_NameTaxSlab;
-            $data['page_title'] = 'View '.Master_NameTaxSlab;
+            $data['breadcum'] = array(Master_CenterLink  => 'Dashboard','master/center' => 'Center Listing', '' => 'View '.Master_NameCenter);
+            $data['title'] = WEBSITE_NAME . ' | '.Master_NameCenter;
+            $data['page_title'] = 'View '.Master_NameCenter;
             $page = 'center/view';
             $data['page'] = $page;
             _layout($data);
@@ -211,15 +214,11 @@ class Center extends CI_Controller
                 $row    =   (array)$citydata[$i];
                 $nestedData     =   array();
                 $nestedData[]   =   $j;
-                $nestedData[]   =   $row["center_name"];
-                $nestedData[]   =   $row["igst"];
-                $nestedData[]   =   $row["cgst"];
-                $nestedData[]   =   $row["sgst"];
-                $nestedData[]   =   $row["cess"];
-                $nestedData[]   =   $row["calculated_tax_on_mrp"];
-                $nestedData[]   =   $row["zero_tax_type"];
+                $nestedData[]   =   '<a href="'.base_url('/master/center/view/').ID_encode($row["center_id"]).'">'.$row["center_name"].'</a>';
+                $nestedData[]   =   $row["target"];
+                $nestedData[]   =   $row["financial_year"];
                 $nestedData[]   =   $row["status"];
-                $state_id        =   $row['id'];
+                $state_id        =   $row['center_id'];
                 $nestedData[]   =   $this->load->view("center/_action", array("row" => $row), true);
                 $data[]         =   $nestedData;
             }
@@ -257,7 +256,7 @@ class Center extends CI_Controller
                     "user_name" => currentuserinfo()->first_name.' '.currentuserinfo()->last_name,
                 );
                 notificationData($data,'Updated');
-                set_flashdata('success', Master_NameTaxSlab.' deleted successfully');
+                set_flashdata('success', Master_NameCenter.' deleted successfully');
                 //redirect('/city');
             } else {
                 set_flashdata('success', 'Some error occured');
@@ -277,7 +276,7 @@ class Center extends CI_Controller
         $post = $this->input->post('id');
         if (!empty($post)) {
             if ($this->center_mod->restoreData($post)) {
-                set_flashdata('success', Master_NameTaxSlab.' Restored successfully');
+                set_flashdata('success', Master_NameCenter.' Restored successfully');
                 //redirect('/city');
             } else {
                 set_flashdata('success', 'Some error occured');

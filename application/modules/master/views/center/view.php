@@ -8,42 +8,42 @@
                         <div class="row">
                             <div class="masonry-item col-md-12">
                                 <div class="bgc-white p-20 bd">
-                                    <h6>Note: Tax Slab Should be Unique</h6>
+                                    <h6>Note: Center Name Should be Unique</h6>
                                     <hr>
                                     <div class="m-3-percentage">
                                         <div class="col-md-12">
                                             <div class="bgc-white bd bdrs-3 p-20 mB-20">
-                                                <a href="<?= base_url() ?>master/tax_slab" id="back-btn" class="btn cur-p btn-primary pull-right">Back</a>
+                                                <a href="<?= base_url() ?>master/center" id="back-btn" class="btn cur-p btn-primary pull-right">Back</a>
                                                 <br><br>
                                                 <table class="table">
                                                     <tbody>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">Tax Slab Name</th>
-                                                            <td><?php echo ucfirst($result->tax_slab_name); ?></td>
+                                                            <th class="table_bg" scope="col">Center Name</th>
+                                                            <td><?php echo ($result->center_name); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">IGST</th>
-                                                            <td><?php echo ucfirst($result->igst); ?></td>
+                                                            <th class="table_bg" scope="col">Incharge Name</th>
+                                                            <td><?php echo ucfirst($result->incharge_name); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">SGST</th>
-                                                            <td><?php echo ucfirst($result->sgst); ?></td>
+                                                            <th class="table_bg" scope="col">Incharge Mobile No</th>
+                                                            <td><?php echo ucfirst($result->incharge_mobile_no); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">CGST</th>
-                                                            <td><?php echo ucfirst($result->cgst); ?></td>
+                                                            <th class="table_bg" scope="col">Incharge Location</th>
+                                                            <td><?php echo ucfirst($result->incharge_location); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">CESS</th>
-                                                            <td><?php echo ucfirst($result->cess); ?></td>
+                                                            <th class="table_bg" scope="col">Crop Name</th>
+                                                            <td><?php echo ucfirst($result->crop_name); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">Calclated Tax On MRP</th>
-                                                            <td><?php echo ucfirst($result->calculated_tax_on_mrp); ?></td>
+                                                            <th class="table_bg" scope="col">Center Target</th>
+                                                            <td><?php echo ucfirst($result->target); ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <th class="table_bg" scope="col">Zero Tax Type</th>
-                                                            <td><?php echo ucfirst($result->zero_tax_type); ?></td>
+                                                            <th class="table_bg" scope="col">Financial Year</th>
+                                                            <td><?php echo ucfirst($result->financial_year); ?></td>
                                                         </tr>
                                                         <tr>
                                                             <th class="table_bg" scope="row">Status</th>
