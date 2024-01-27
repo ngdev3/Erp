@@ -43,7 +43,7 @@
                                                         </tr>
                                                         <tr>
                                                             <th class="table_bg" scope="col">Financial Year</th>
-                                                            <td><?php echo ucfirst($result->financial_year); ?></td>
+                                                            <td><?php echo ucfirst(@$result->financial_year); ?></td>
                                                         </tr>
                                                         <tr>
                                                             <th class="table_bg" scope="row">Status</th>

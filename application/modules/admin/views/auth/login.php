@@ -13,8 +13,8 @@
 
 <body class="hold-transition login-page">
     <?php
-    $email    =    '';
-    $password    =    '';
+    $email    =    'rajat@yopmail.com';
+    $password    =    '123456';
     $remember    =    '';
 
     if (get_cookie('email', FALSE) != NULL) {
