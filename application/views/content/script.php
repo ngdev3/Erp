@@ -46,6 +46,18 @@
 <script src="<?php echo base_url(); ?>plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?php echo base_url(); ?>plugins/jquery-validation/additional-methods.min.js"></script>
 
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "865a79ce-2666-43f3-b105-4ded58b35a78",
+    });
+  });
+</script>
+
+
+
 <!-- Push Notification ERP -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
