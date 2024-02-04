@@ -2,12 +2,75 @@
 
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(function(OneSignal) {
-    OneSignal.init({
-      appId: "865a79ce-2666-43f3-b105-4ded58b35a78",
-    });
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(function(OneSignal) {
+  OneSignal.init({
+    appId: "99397374-10fe-4865-b62d-d8b71114b320",
+    safari_web_id: "web.onesignal.auto.20f3ee95-6f21-4aad-a9bb-9c5899a4353a",
+    notifyButton: {
+      enable: true,
+    },
+    promptOptions: {
+      slidedown: {
+        prompts: [{
+            type: "smsAndEmail",
+            autoPrompt: false,
+            text: {
+              emailLabel: "Insert Email Address",
+              smsLabel: "Insert Phone Number",
+              acceptButton: "Submit",
+              cancelButton: "No Thanks",
+              actionMessage: "Receive the latest news, updates and offers as they happen.",
+              updateMessage: "Update your push notification subscription preferences.",
+              confirmMessage: "Thank You!",
+              positiveUpdateButton: "Save Preferences",
+              negativeUpdateButton: "Cancel",
+            },
+            delay: {
+              pageViews: 1,
+              timeDelay: 20
+            },
+          },
+          {
+            type: "category",
+            autoPrompt: true,
+            text: {
+              actionMessage: "We'd like to show you notifications for the latest news and updates.",
+              acceptButton: "Allow",
+              cancelButton: "Cancel",
+
+              /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
+              negativeUpdateButton: "Cancel",
+              positiveUpdateButton: "Save Preferences",
+              updateMessage: "Update your push notification subscription preferences.",
+            },
+            delay: {
+              pageViews: 3,
+              timeDelay: 20
+            },
+            categories: [{
+                tag: "politics",
+                label: "Politics"
+              },
+              {
+                tag: "local_news",
+                label: "Local News"
+              },
+              {
+                tag: "world_news",
+                label: "World News",
+              },
+              {
+                tag: "culture",
+                label: "Culture"
+              },
+            ]
+          }
+        ]
+      }
+    }
   });
+});
 </script>
 
 
