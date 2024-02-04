@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|assets|uploads|dist|plugins|build|docs|push)
+RewriteCond $1 !^(index\.php|assets|uploads|dist|plugins|build|docs|push|OneSignalSDKWorker.js)
 RewriteRule ^(.*)$ index.php/$1 [L]
 
 
