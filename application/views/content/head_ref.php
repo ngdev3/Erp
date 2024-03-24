@@ -16,3 +16,16 @@
 
 <!-- Jquery Confirm Box -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>plugins/jconfirm/jquery-confirm.min.css">
+<script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    window.OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+            appId: "6d1e4f4b-517a-421d-bc1e-ce794e41d410",
+            notifyButton: {
+                enable: true
+            },
+            serviceWorkerParam: { scope: "https://thecrindustries.online/push/onesignal/" },
+            serviceWorkerPath: "https://thecrindustries.online/push/onesignal/OneSignalSDKWorker.js",
+        });
+    });
+</script>
