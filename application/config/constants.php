@@ -154,3 +154,9 @@ define('Master_NameTaxSlab', 'Tax Slab');
 define('Master_CenterLink', 'admin/dashboard/');
 define('Master_NameCenter', 'Center');
 
+/**
+ * Master Breadcrumb Account
+ */
+define('Master_Account', 'admin/dashboard/');
+define('Master_NameAccount', 'Account');
+

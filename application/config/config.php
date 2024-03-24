@@ -34,10 +34,15 @@ if ($_SERVER['SERVER_NAME'] == 'thecrindustries.online' || $_SERVER['SERVER_NAME
 } else if(phpversion() == '5.6.31') {
 
     $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/RiceMill/ERP/ERP_Admin/';
+
 }else  if(phpversion() == '5.6.23'){
+    
     $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/Erp';
+
 }else{
+
     $config['base_url'] = 'http://' . $_SERVER['HTTP_HOST'] . '/Erp';
+
 }
 $config['sendmailCI'] = false;
 /*

@@ -99,7 +99,15 @@
 		
 	</div>
 	<!-- ./wrapper -->
-
+	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+		<script>
+		window.OneSignalDeferred = window.OneSignalDeferred || [];
+		OneSignalDeferred.push(function(OneSignal) {
+			OneSignal.init({
+			appId: "6d1e4f4b-517a-421d-bc1e-ce794e41d410",
+			});
+		});
+		</script>
 	
 </body>
 

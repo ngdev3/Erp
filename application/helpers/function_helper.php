@@ -115,6 +115,61 @@ if (!function_exists('getUnitType')) {
     }
 }
 
+/**
+ * Get The GST Tax Slab
+ *
+ * This function Get The GST Tax Slab
+ *
+ * @param	
+ * @return
+ */
+if (!function_exists('getGSTAPIKey')) {
+
+    function getGSTAPIKey()
+    {
+        
+        $CI = &get_instance();
+        $CI->db->select('*');
+        $CI->db->from('gstapikey');
+        $CI->db->where('total_hit !=', 20);
+        $query = $CI->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+}
+
+/**
+ * GetData From GST
+ * 
+ */
+if (!function_exists('getGSTData')) {
+
+    function getGSTData($api_key, $gstnumber)
+    {
+        $data = getGSTAPIKey($api_key);
+        if(empty($data)) return false;
+        $urls = $data->url."/check/".$data->api_key."/".$gstnumber;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => $urls,
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
+}
+
 
 /**
  * is_adminprotected
@@ -813,29 +868,7 @@ if (!function_exists('_sendMailPhpMailer')) {
 
 
 
-/**
- * send mobile one time password 
- * send one time password api function
- */
-if (!function_exists('send_otp')) {
 
-    function send_otp($content, $number)
-    {
-        $content = urlencode($content);
-        $Url = "http://tra.smsmyntraa.com/API/WebSMS/Http/v1.0a/index.php?username=" . USERNAME . "&password=" . PASSWORD . "&sender=" . SENDERID . "&to=" . $number . "&message=" . $content . "&reqid=1&format={json|text}&route_id=Transactional&callback=&unique=0&sendondate=" . date('Y-m-d H:i:s') . "";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $Url);
-        curl_setopt($ch, CURLOPT_USERAGENT, "MozillaXYZ/1.0");
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        $output = curl_exec($ch);
-        $errmsg = curl_error($ch);
-        $cInfo = curl_getinfo($ch);
-        curl_close($ch);
-        return $output;
-    }
-}
 
 
 if (!function_exists('array_to_excel')) {

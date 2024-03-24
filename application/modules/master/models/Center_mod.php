@@ -1,6 +1,6 @@
 <?php
 
-class Center_mod extends CI_Model
+class account_mod extends CI_Model
 {
 
     var $tableName = 'center';
@@ -12,7 +12,7 @@ class Center_mod extends CI_Model
     //THIS FUNCTION ADD
     public function add($data)
     {
-        if ($this->db->insert("center", $data)) {
+        if ($this->db->insert("account", $data)) {
             return true;
         }
     }
@@ -20,7 +20,7 @@ class Center_mod extends CI_Model
     function count_data()
     {
         $this->db->select('*');
-        return $query = $this->db->get('center');
+        return $query = $this->db->get('account');
     }
 
     function get_data()
@@ -42,7 +42,7 @@ class Center_mod extends CI_Model
     {
         $data['status'] = 'Delete';
         $this->db->where('id', $id);
-        $this->db->update('center', $data);
+        $this->db->update('account', $data);
         return true;
     }
 
@@ -50,7 +50,7 @@ class Center_mod extends CI_Model
     {
         $data['status'] = 'Active';
         $this->db->where('id', $id);
-        $this->db->update('center', $data);
+        $this->db->update('account', $data);
         return true;
     }
 

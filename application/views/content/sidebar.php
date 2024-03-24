@@ -231,15 +231,15 @@
 					</li>
 
 					<li class="nav-item">
-						<a href="<?= base_url('master/company') ?>" class="nav-link">
+						<a href="<?= base_url('master/account') ?>" class="nav-link">
 							<i class="far fa-circle nav-icon"></i>
-							<p>Company Master</p>
+							<p>Account Master</p>
 							<i class="fas fa-angle-left right"></i>
 						</a>
 						<ul class="nav nav-treeview">
 							<li class="nav-item ">
-								<a href="<?= base_url('master/company/add') ?>" class="nav-link 
-								<?php if ($uri1 == 'master' && $uri2 == 'company' && $uri3 == 'add') {
+								<a href="<?= base_url('master/account/add') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'account' && $uri3 == 'add') {
 									echo 'active';
 								} ?>">
 									<i class="far fa-circle nav-icon"></i>
@@ -247,8 +247,8 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a href="<?= base_url('master/company') ?>" class="nav-link 
-								<?php if ($uri1 == 'master' && $uri2 == 'company' && empty($uri3)) {
+								<a href="<?= base_url('master/account') ?>" class="nav-link 
+								<?php if ($uri1 == 'master' && $uri2 == 'account' && empty($uri3)) {
 									echo 'active';
 								} ?>">
 									<i class="far fa-circle nav-icon"></i>
